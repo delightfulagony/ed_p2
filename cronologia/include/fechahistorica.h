@@ -28,18 +28,9 @@ private:
 	 * (rep.ano,rep.nEventos,rep.*eventos)
 	 */
 
-	/**
-	 * @brief Año del objeto
-	 */
-	int ano;
-	/**
-	 * @brief Número de eventos en el año del objeto
-	 */
-	unsigned int nEventos;
-	/**
-	 * @brief Array de eventos
-	 */
-	std::string *eventos;
+	int ano;		  ///< Año del objeto
+	unsigned int nEventos;	  ///< Número de eventos en el año del objeto
+	std::string *eventos;	  ///< Array de eventos
 
 	void reservarMemoria(const unsigned int& _nEventos);
 	void liberarMemoria();
@@ -87,7 +78,7 @@ public:
 	/**
 	 * @brief Imprime la fecha en el formato "Año#Evento[1]#...#Evento[n]"
 	 */
-	void escribirFecha()const;
+	void escribirFecha() const;
 	/**
 	 * @brief Suma al objeto otra fechaHistorica dada
 	 * @pre Que ambos objetos tengan el mismo año
@@ -95,7 +86,13 @@ public:
 	 * @return La suma de los eventos de ambas fechas
 	 */
 	fechaHistorica& suma(const fechaHistorica& sumaFechaHistorica);
-	bool buscarEvento(const std::string& _evento)const;
+	/**
+	 * @brief Busca un evento en el conjunto de eventos de fechaHistorica
+	 * @param evento Evento a buscar
+	 * @return Devuelve la posición del evento en el conjunto de eventos y
+	 * @retval -1 si el evento no se encuentra en la fecha
+	 */
+	int buscarEvento(const std::string& _evento) const;
 };
 
 #endif
