@@ -41,7 +41,7 @@ private:
 	 */
 	std::string *eventos;
 
-	void reservarMemoria(const unsigned int _nEventos);
+	void reservarMemoria(const unsigned int& _nEventos);
 	void liberarMemoria();
 	void copiar(const fechaHistorica& copia);
 public:
