@@ -76,10 +76,6 @@ public:
 	 */
 	void asignarEvento(const std::string& nuevo, const int indice=-1);
 	/**
-	 * @brief Imprime la fecha en el formato "Año#Evento[1]#...#Evento[n]"
-	 */
-	void escribirFecha() const;
-	/**
 	 * @brief Suma al objeto otra fechaHistorica dada
 	 * @pre Que ambos objetos tengan el mismo año
 	 * @param sumaFechaHistorica objeto fechaHistorica a sumar
@@ -93,6 +89,36 @@ public:
 	 * @retval -1 si el evento no se encuentra en la fecha
 	 */
 	int buscarEvento(const std::string& _evento) const;
+	/**
+	 * @brief Sobrecarga del operador de asignación
+	 * @param fechaH fechaHistorica que se asigna
+	 * @return El objeto fechaHistorica asignado
+	 */
+	fechaHistorica& operator=(const fechaHistorica& fechaH);
+	/**
+	 * @brief Sobrecarga del operador de suma
+	 * @param fechaH Segundo sumando de la operación
+	 * @return La suma de los dos objetos fechaHistorica
+	 */
+	fechaHistorica& operator+(const fechaHistorica& fechaH);
+	/**
+	 * @brief Sobrecarga del operador +=
+	 * @param fechaH Objeto con el que se realiza la operación
+	 * @return Resultado de la operación
+	 */
+	fechaHistorica& operator+=(const fechaHistoria& fechaH);
+	/**
+	 * @brief Sobrecarga de el operador de entrada
+	 */
+	friend std::istream& operator>>(std::istream& i, fechaHistorica& fechaH);
+	/**
+	 * @brief Sobrecarga del operador de salida. Imprime la fecha en el 
+	 * formato "Año#Evento[1]#...#Evento[n]"
+	 */
+	friend std::ostream& operator<<(std::ostream& o, const fechaHistorica& fechaH);
 };
+
+std::istream& operator>>(std::istream& i, fechaHistorica& fechaH);
+std::ostream& operator<<(std::ostream& o, const fechaHistorica& fechaH);
 
 #endif
