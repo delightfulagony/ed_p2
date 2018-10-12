@@ -103,7 +103,30 @@ public:
 	 * @param sumaCronologia Cronología que se quiere añadir a la actual
 	 * @return La unión de ambas cronologías
 	 */
-	cronologia& unionCronologias(const cronologia& sumaCronologia);	 
+	cronologia& unionCronologias(const cronologia& sumaCronologia);
+	/**
+	 * @brief Sobrecarga del operador de asignación
+	 * @param crono Cronología que se asigna a la creada
+	 * @return La cronología asignada
+	 */
+	cronologia& operator=(const cronologia& crono);
+	/**
+	 * @brief Sobrecarga del operador de suma
+	 * @param crono Segundo sumando de la operación
+	 * @return La suma de las dos cronologías
+	 */
+	cronologia& operator+(const cronologia& crono);
+	/**
+	 * @brief Sobrecarga de el operador de entrada
+	 */
+	friend std::istream& operator>>(std::istream& i, cronologia& crono);
+	/**
+	 * @brief Sobrecarga del operador de salida
+	 */
+	friend std::ostream& operator<<(std::ostream& o, const cronologia& crono);	 
 };
+
+std::istream& operator>>(std::istream& i, cronologia& crono);
+std::ostream& operator<<(std::ostream& o, const cronologia& crono);
 
 #endif
