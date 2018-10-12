@@ -117,6 +117,12 @@ public:
 	 */
 	cronologia& operator+(const cronologia& crono);
 	/**
+	 * @brief Sobrecarga del operador +=
+	 * @param crono Objeto con el que se realiza la operación
+	 * @return Resultado de la operación
+	 */
+	cronologia& operator+=(const cronologia& crono);
+	/**
 	 * @brief Sobrecarga de el operador de entrada
 	 */
 	friend std::istream& operator>>(std::istream& i, cronologia& crono);
