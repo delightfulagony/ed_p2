@@ -71,8 +71,8 @@ public:
 	 * @brief Altera el evento al que se refiere el índice, si no se
 	 * proporciona índice, se añade al final.
 	 * @param nuevo Evento a introducir en el objeto
-	 * @param indice Lugar en el que introducir el evento, si es -1 se añade
-	 * el evento al final.
+	 * @param indice Lugar en el que introducir el evento, si es -1 se
+	 * añade el evento al final.
 	 */
 	void asignarEvento(const std::string& nuevo, const int indice=-1);
 	/**

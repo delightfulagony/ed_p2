@@ -31,10 +31,10 @@ private:
 	unsigned int nFechas;	    ///< Número de fechas en la cronologia
 	fechaHistorica *fechas;	    ///< Conjunto de fechas con eventos
 	
-	void reservarMemoria(const unsigned int& _nFechas);
-	void liberarMemoria();
-	void copiar(const cronologia& copia);
-	void ordenaCronologia();
+	void reservarMemoria(const unsigned int& _nFechas);	///< Reserva memoria dinámica
+	void liberarMemoria();					///< Libera memoria dinámica
+	void copiar(const cronologia& copia);			///< Crea una copia del objeto
+	void ordenaCronologia();				///< Ordena las fechas del objeto en orden cronológico
 public:
 	/**
 	 * @brief Constructor por defecto de cronologia. Crea una cronología
@@ -45,7 +45,7 @@ public:
 	 * @brief Constructor por copia de cronologia
 	 * @param copia Objeto a copiar por el constructor
 	 */
-	cronologia(const cronologia& copia);
+	cronologia(const cronologia& copia) {copiar(copia);}
 	/**
 	 * @brief Constructor primitivo de cronologia.
 	 * @param _nFechas Número de fechas que va a incluir la cronología
@@ -54,7 +54,7 @@ public:
 	/**
 	 * @brief Destructor de la clase
 	 */
-	~cronologia();
+	~cronologia() {liberarMemoria();}
 	/**
 	 * @brief Observador del número de fechas
 	 * @return El número de fechas en la cronología
