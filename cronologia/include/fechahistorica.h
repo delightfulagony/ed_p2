@@ -55,12 +55,17 @@ public:
 	/**
 	 * @brief Destructor de la clase fechaHistorica
 	 */
-	~fechaHistorica() {liberarMemoria;}	
+	~fechaHistorica() {liberarMemoria();}	
 	/**
 	 * @brief Observador del parámetro anio
 	 * @return Devuelve el año 
 	 */
 	int getAnio() const {return anio;}
+	/**
+	 * @brief Observador del número de eventos
+	 * @return El número de eventos
+	 */
+	int getNumEventos() const {return nEventos;}
 	/**
 	 * @brief Observador de eventos
 	 * @param indice Índice del array de eventos
@@ -68,6 +73,11 @@ public:
 	 * @pre El índice debe ser válido
 	 */
 	std::string getEvento(const unsigned int& indice) const {return evento[indice];}
+	/**
+	 * @brief Redimensiona el tamaño del array de eventos de una fecha
+	 * @param t Nuevo tamaño de la lista de eventos
+	 */
+	void redimensionar(const unsigned int& t);
 	/**
 	 * @brief Altera el evento al que se refiere el índice, si no se
 	 * proporciona índice, se añade al final.
