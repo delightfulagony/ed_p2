@@ -63,18 +63,16 @@ public:
 	/**
 	 * @brief Buscador de eventos
 	 * @param evento Evento que se quiere buscar en la cronología
-	 * @param fechas Array en el que se escriben las fechas en las que
-	 * se encuentre el evento
-	 * @return El número de fechas en las que se encuentra el evento
+	 * @return Año en el que se encuentra el evento
 	 */
-	int buscarEvento(const std::string& evento, int fechas[]) const;
+	int buscarEvento(const std::string& evento) const;
 	/**
 	 * @brief A partir de una fecha dada devuelve todos sus eventos
-	 * @param fecha Fecha de la que se quiere saber los eventos
+	 * @param anio Año del  que se quiere saber los eventos
 	 * @return La fecha con todos sus eventos. Se devuelve una fecha
 	 * vacía si no se encuentra dentro de la cronología
 	 */
-	fechaHistorica getEventos(const int& fecha) const;
+	fechaHistorica getEventos(const int& anio) const;
 	/**
 	 * @brief Comprueba si una determinada fecha se encuentra en la
 	 * cronología
@@ -93,17 +91,32 @@ public:
 	bool asignarFecha(const fechaHistorica& fecha);
 	/**
 	 * @brief Elimina una fecha con sus eventos a la cronología
-	 * @param ano Año que se quiere eliminar de la cronología
+	 * @param anio Año que se quiere eliminar de la cronología
 	 * @return @retval true Si se ha realizado la operación exitosamente
 	 * @retval false Si ha ocurrido un error durante la operación
 	 */
-	bool eliminaFecha(const int& ano);
+	bool eliminaFecha(const int& anio);
 	/**
 	 * @brief Realiza la unión de dos cronologías
 	 * @param sumaCronologia Cronología que se quiere añadir a la actual
 	 * @return La unión de ambas cronologías
 	 */
 	cronologia& unionCronologias(const cronologia& sumaCronologia);
+	/**
+	 * @brief Obtiene la (sub)cronologia de eventos historicos acaecidos
+	 * en un rango de años determinado
+	 * @param anioDesde Año en el que se inicia la (sub)cronologia
+	 * @param anioHasta Año en el que termina la (sub)cronologia
+	 * @return (Sub)cronologia resultante
+	 */
+	cronologia& subCronologia(const int& anioDesde, const int& anioHasta) const;
+	/**
+	 * @brief Obtiene la (sub)cronologia de eventos historicos asociados
+	 * a una palabra clave.
+	 * @param clave Palabra a buscar
+	 * @return Cronologia de eventos relacionados con la palabra
+	 */
+	cronologia& cronologiaClave(const std::string& clave) const;
 	/**
 	 * @brief Sobrecarga del operador de asignación
 	 * @param crono Cronología que se asigna a la creada

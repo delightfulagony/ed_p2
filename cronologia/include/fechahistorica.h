@@ -12,7 +12,7 @@
 /**
  * @brief T.D.A. fechaHistorica
  * Una instancia @e c del tipo de datos abstracto @c fechaHistorica es un objeto
- * que representa a una fecha del calendario gregoriano junto con un conjunto de
+ * que representa a una fecha del calendario gregorianio junto con un conjunto de
  * eventos ocurridos durante ese año
  * @author Manuel Gachs Ballegeer
  * @author Gonzalo Moreno Soto
@@ -25,10 +25,10 @@ private:
 	 * @section invConjunto Invariante de la representación
 	 * @section faConjunto Función de abstracción
 	 * Un objeto válido @e rep del TDA fechaHistorica representa al valor
-	 * (rep.ano,rep.nEventos,rep.*eventos)
+	 * (rep.anio,rep.nEventos,rep.*eventos)
 	 */
 
-	int ano;		  ///< Año del objeto
+	int anio;		  ///< Año del objeto
 	unsigned int nEventos;	  ///< Número de eventos en el año del objeto
 	std::string *eventos;	  ///< Array de eventos
 
@@ -48,19 +48,19 @@ public:
 	fechaHistorica(const fechaHistorica& copia);
 	/**
 	 * @brief Constructor primitivo de fechaHistorica
-	 * @param _ano Año del objeto
+	 * @param _anio Año del objeto
 	 * @param _nEventos Número de eventos en el año del objeto
 	 */
-	fechaHistorica(const int& _ano, const unsigned int& _nEventos=0);
+	fechaHistorica(const int& _anio, const unsigned int& _nEventos=0);
 	/**
 	 * @brief Destructor de la clase fechaHistorica
 	 */
 	~fechaHistorica();	
 	/**
-	 * @brief Observador del parámetro ano
+	 * @brief Observador del parámetro anio
 	 * @return Devuelve el año 
 	 */
-	int getAno() const {return ano;}
+	int getAnio() const {return anio;}
 	/**
 	 * @brief Observador de eventos
 	 * @param indice Indice del array de eventos
