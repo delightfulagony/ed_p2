@@ -35,6 +35,7 @@ private:
 	void liberarMemoria();					///< Libera memoria dinámica
 	void copiar(const cronologia& copia);			///< Crea una copia del objeto
 	void ordenaCronologia();				///< Ordena las fechas del objeto en orden cronológico
+	void resize(const unsigned int& tamanio);		///< Altera el tamaño del objeto
 public:
 	/**
 	 * @brief Constructor por defecto de cronologia. Crea una cronología
@@ -76,19 +77,19 @@ public:
 	/**
 	 * @brief Comprueba si una determinada fecha se encuentra en la
 	 * cronología
-	 * @param fecha Fecha de la que se quiere saber si se encuentra en 
+	 * @param anio Anio del que se quiere saber si se encuentra en 
 	 * la cronología
 	 * @return @retval true Si la fecha se encuentra en la cronología y
 	 * @retval false Si no se encuentra dentro de la cronología
 	 */
-	bool estaFecha(const int& fecha) const;
+	bool estaFecha(const int& anio) const;
 	/**
 	 * @brief Añade una nueva fecha con sus eventos a la cronología
 	 * @param fecha Fecha que se quiere añadir
 	 * @return @retval true Si se ha realizado la operación exitosamente
 	 * @retval false Si ha ocurrido un error durante la operación
 	 */
-	bool asignarFecha(const fechaHistorica& fecha);
+	bool añadirFecha(const fechaHistorica& fecha);
 	/**
 	 * @brief Elimina una fecha con sus eventos a la cronología
 	 * @param anio Año que se quiere eliminar de la cronología
