@@ -1,7 +1,6 @@
 /**
  * @file cronologia.h
  * @brief Fichero fuente del TDA cronologia
- * @author Manuel Gachs Ballegeer
  * @author Gonzalo Moreno Soto
  * @license GPLv3
  */
@@ -24,23 +23,23 @@ void cronologia::liberarMemoria() {
 void cronologia::copiar(const cronologia& copia) {
 	nFechas = copia.nFechas;
 	reservarMemoria(nFechas);
-	for(size_t i=0;i<nFechas;i++)
+	for(std::size_t i=0;i<nFechas;i++)
 		fechas[i] = copia.fechas[i];
 }
 
 void cronologia::resize(const unsigned int& tamanio) {
 	fechaHistorica aux(*this);
 	reservarMemoria(tamanio);
-	size_t min = (aux.getNFechas()?tamanio:aux.getNFechas);
-	for (size_t i=0;i<min;i++)
+	std::size_t min = (aux.getNFechas()?tamanio:aux.getNFechas);
+	for (std::size_t i=0;i<min;i++)
 		fechas[i] = aux.getEventos(i);
 	nFechas=tamanio;
 }
 
 void cronologia::ordenaCronologia() {
 	fechaHistorica aux;
-	for (size_t i=0;i<nFechas;i++) {
-		for (size_t j=nFechas-1;j>=0;j--) {
+	for (std::size_t i=0;i<nFechas;i++) {
+		for (std::size_t j=nFechas-1;j>=0;j--) {
 			if (fechas[i].getAnio() > fechas[j].getAnio()) {
 				aux = fechas[i];
 				fechas[i] = fechas[j];
@@ -61,8 +60,8 @@ cronologia::cronologia(const unsigned int& _nFechas) {
 }
 
 int cronologia::buscarEvento(const std::string& evento) const {
-	for (size_t i=0;i<nFechas;i++) {
-		for(size_t j=0;j<fechas[i].getNumEventos();j++) {
+	for (std::size_t i=0;i<nFechas;i++) {
+		for(std::size_t j=0;j<fechas[i].getNumEventos();j++) {
 			if (fechas[i][j]==evento)
 				return fechas[i].getAnio();
 		}
@@ -70,27 +69,27 @@ int cronologia::buscarEvento(const std::string& evento) const {
 }
 
 fechaHistorica cronologia::getEventos(const int& anio) const {
-	for (size_t i=0;i<nFechas;i++) {
+	for (std::size_t i=0;i<nFechas;i++) {
 		if (fechas[i].getAnio() == anio)
 			return fechas[i];
 	}
 }
 
 bool cronologia::estaFecha(const int& anio) {
-	for (size_t i=0;i<nFechas;i++) {
+	for (std::size_t i=0;i<nFechas;i++) {
 		if (fechas[i].getAnio()==anio)
 			return true;
 	}
 	return false;
 }
 
-bool cronologia::añadirFecha(const fechaHistorica& fecha) {
+bool cronologia::asignarFecha(const fechaHistorica& fecha) {
 	resize(nFechas+1);
 	fechas[nFechas-1]=fecha;
 }
 
 bool cronologia::eliminaFecha(const int& anio) {
-	for (size_t i=0;i<nFechas;i++) {
+	for (std::size_t i=0;i<nFechas;i++) {
 		if (fechas[i].getAnio()==anio)
 			fechas[i]=fechas[nFechas-1];
 	}
@@ -99,12 +98,12 @@ bool cronologia::eliminaFecha(const int& anio) {
 }
 
 cronologia& cronologia::unionCronologias(const cronologia& sumaCronologia) {
-	for (size_t i=0;i<nFechas;i++) {
-		for (size_t j=0;j<sumaCronologia.nFechas;j++) {
+	for (std::size_t i=0;i<nFechas;i++) {
+		for (std::size_t j=0;j<sumaCronologia.nFechas;j++) {
 			if (fechas[i].getAnio()==sumaCronologia[j].getAnio()) {
 				fechas[i] += sumaCronologia.fechas[j];
 			} else {
-				añadirFecha(sumaCronologia.fechas[j];
+				asignarFecha(sumaCronologia.fechas[j];
 			}
 		}
 	}
@@ -114,14 +113,28 @@ cronologia& cronologia::unionCronologias(const cronologia& sumaCronologia) {
 
 cronologia& cronologia::subCronologia(const int& anioDesde, const int& anioHasta) const {
 	cronologia subCrono;
-	for (size_t i=0;i<nFechas;i++) {
+	for (std::size_t i=0;i<nFechas;i++) {
 		if (fechas[i].getAnio()>=anioDesde and fechas[i].getAnio()<=anioHasta)
-			añadirFecha(fechas[i]);
+			asignarFecha(fechas[i]);
 	}
 	ordenaCronologia();
 	return *this;
 }
-cronologia& cronologia::cronologiaClave(const std::string& clave) const {}
+cronologia& cronologia::cronologiaClave(const std::string& clave) const {
+	cronologia subCrono;
+	fechaHistorica auxFecha;
+	std::size_t encontrado;
+	for (std::size_t i=0;i<nFechas;i++) {
+		for (std::size_t j=0;j<fechas[i].getNumEventos();j++) {
+			encontrado=fechas[i]getEvento(j).find(clave);
+			if (encontrado!=std::string::npos)
+				auxFecha.asignarEvento(fechas[i].getEvento(j));
+		}
+		subCrono.asignarFecha(auxFecha);
+	}
+	return subCrono;
+
+}
 
 cronologia& cronologia::operator=(const cronologia& crono) {
 	copiar(crono);
@@ -138,4 +151,18 @@ cronologia& operator+(const cronologia& crono) {
 cronologia& operator+=(const cronologia& crono) {
 	unionCronologias(crono);
 	return *this;
+} 
+
+std::ostream& operator<<(std::ostream& os, const cronologia& crono) {
+	for (std::size_t i=0;i<crono.nFechas;i++)
+		os << crono.fechas[i] << endl;
+	return os;
+}
+
+std::istream& operator>>(std::istream& is, cronologia& crono) {
+	is >> crono.nFechas;
+	crono.reservarMemoria(crono.nFechas);
+	for (std::size_t i=0;i<crono.nFechas;i++)
+		is >> crono.fechas[i];
+	return is;
 }

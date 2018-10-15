@@ -89,7 +89,7 @@ public:
 	 * @return @retval true Si se ha realizado la operación exitosamente
 	 * @retval false Si ha ocurrido un error durante la operación
 	 */
-	bool añadirFecha(const fechaHistorica& fecha);
+	bool asignarFecha(const fechaHistorica& fecha);
 	/**
 	 * @brief Elimina una fecha con sus eventos a la cronología
 	 * @param anio Año que se quiere eliminar de la cronología
@@ -146,7 +146,7 @@ public:
 	friend std::ostream& operator<<(std::ostream& o, const cronologia& crono);	 
 };
 
-std::istream& operator>>(std::istream& i, cronologia& crono);
 std::ostream& operator<<(std::ostream& o, const cronologia& crono);
+std::istream& operator>>(std::istream& i, cronologia& crono);
 
 #endif
