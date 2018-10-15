@@ -45,7 +45,7 @@ public:
 	 * @brief Constructor por copia del fechaHistorica
 	 * @param copia Objeto a copiar por el constructor
 	 */
-	fechaHistorica(const fechaHistorica& copia);
+	fechaHistorica(const fechaHistorica& copia) {copiar(copia);}
 	/**
 	 * @brief Constructor primitivo de fechaHistorica
 	 * @param _anio Año del objeto
@@ -55,7 +55,7 @@ public:
 	/**
 	 * @brief Destructor de la clase fechaHistorica
 	 */
-	~fechaHistorica();	
+	~fechaHistorica() {liberarMemoria;}	
 	/**
 	 * @brief Observador del parámetro anio
 	 * @return Devuelve el año 
@@ -63,10 +63,11 @@ public:
 	int getAnio() const {return anio;}
 	/**
 	 * @brief Observador de eventos
-	 * @param indice Indice del array de eventos
-	 * @return Evento en el lugar definido por indice
+	 * @param indice Índice del array de eventos
+	 * @return Evento en el lugar definido por índice
+	 * @pre El índice debe ser válido
 	 */
-	std::string getEvento(const unsigned int& indice) const;
+	std::string getEvento(const unsigned int& indice) const {return evento[indice];}
 	/**
 	 * @brief Altera el evento al que se refiere el índice, si no se
 	 * proporciona índice, se añade al final.
