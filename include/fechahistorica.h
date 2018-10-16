@@ -32,9 +32,9 @@ private:
 	unsigned int nEventos;	  ///< Número de eventos en el año del objeto
 	std::string *eventos;	  ///< Array de eventos
 
-	void reservarMemoria(const unsigned int& _nEventos);
-	void liberarMemoria();
-	void copiar(const fechaHistorica& copia);
+	void reservarMemoria(const unsigned int& _nEventos);	///< Reserva memoria dinámica
+	void liberarMemoria(); 					///< Libera memoria dinámica
+	void copiar(const fechaHistorica& copia);		///< Crea una copia del objeto
 public:
 	/**
 	 * @brief Constructor por defecto de fechaHistorica . Crea la fecha 
