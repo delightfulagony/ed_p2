@@ -101,9 +101,8 @@ std::istream& operator>>(std::istream& i, fechaHistorica& fechaH) {
 	while (ultimaAlmohadilla!=-1) {
 		std::string _evento;
 		ultimaAlmohadilla = cadenaEventosfind('#');
-		if (ultimaAlmohadilla!=-1) {
+		if (ultimaAlmohadilla!=-1)
 			_evento = substr(comienzoEvento,ultimaAlmohadilla-comienzoEvento);
-		}	
 		else
 			_evento = substr(comienzoEvento,-1);
 		comienzoEvento = ultimaAlmohadilla + 1;
