@@ -35,6 +35,7 @@ private:
 	void reservarMemoria(const unsigned int& _nEventos);	///< Reserva memoria dinámica
 	void liberarMemoria(); 					///< Libera memoria dinámica
 	void copiar(const fechaHistorica& copia);		///< Crea una copia del objeto
+	void redimensionar(const unsigned int& t);		///< Redimensiona el array de eventos
 public:
 	/**
 	 * @brief Constructor por defecto de fechaHistorica . Crea la fecha 
@@ -74,11 +75,6 @@ public:
 	 */
 	std::string getEvento(const unsigned int& indice) const {return evento[indice];}
 	/**
-	 * @brief Redimensiona el tamaño del array de eventos de una fecha
-	 * @param t Nuevo tamaño de la lista de eventos
-	 */
-	void redimensionar(const unsigned int& t);
-	/**
 	 * @brief Altera el evento al que se refiere el índice, si no se
 	 * proporciona índice, se añade al final.
 	 * @param nuevo Evento a introducir en el objeto
@@ -111,13 +107,13 @@ public:
 	 * @param fechaH Segundo sumando de la operación
 	 * @return La suma de los dos objetos fechaHistorica
 	 */
-	fechaHistorica& operator+(const fechaHistorica& fechaH);
+	fechaHistorica& operator+(const fechaHistorica& fechaH) {return suma(fechaH);}
 	/**
 	 * @brief Sobrecarga del operador +=
 	 * @param fechaH Objeto con el que se realiza la operación
 	 * @return Resultado de la operación
 	 */
-	fechaHistorica& operator+=(const fechaHistoria& fechaH);
+	fechaHistorica& operator+=(const fechaHistoria& fechaH) {return suma(fechaH);}
 	/**
 	 * @brief Sobrecarga de el operador de entrada
 	 */
