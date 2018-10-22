@@ -1,6 +1,7 @@
 # @brief Makefile de la práctica 2 para la asignatura Estructura de Computadores del DGIIM
 # @file Makefile
 # @author Gonzalo Moreno Soto
+# @author Manuel Gachs Ballegeer
 # @license GPLv3
 
 #Nombre del proyecto
@@ -25,7 +26,7 @@ VFLAGS = --leak-check=full
 
 ## Tests
 # Tests a ejecutar con "$make tests"
-TESTS = 
+TESTS = $(DATA)/*.txt
 
 # test1
 TEST1 = $(DATA)/timeline_algorithms.txt
@@ -38,6 +39,9 @@ TEST3 = $(DATA)/timeline_science.txt
 
 # test4
 TEST4 = $(DATA)/timeline_worldhistory.txt
+
+# test de valgrind
+VTEST = $(DATA)/timeline_algorithms.txt
 
 # Dependencias
 
@@ -69,20 +73,36 @@ zip: $(PROJECT)
 	rm -rf $(OBJ)/*
 	rm -rf $(DOC)/html $(DOC)/latex
 	rm -rf *.bgr
-	zip -r $(ZIP)/practica6.zip *
+	zip -r $(ZIP)/cronologia.zip *
 	
 valgrind: $(PROJECT)
 	valgrind $(VFLAGS) $(BIN)/$(PROJECT) -c $(VTEST) 
 
+bigtest:
+	./$(BIN)/$(PROJECT) $(TESTS)
+
+test1:
+	./$(BIN)/$(PROJECT) $(TEST1)
+
+test2:
+	./$(BIN)/$(PROJECT) $(TEST2)
+	
+test3:
+	./$(BIN)/$(PROJECT) $(TEST3)
+	
+test4:
+	./$(BIN)/$(PROJECT) $(TEST4)
+
 help:
 	@echo "________________________________________________________________________________"
 	@echo "Lista de parámetros posibles:"
-	@echo "		learn		Realiza la compilación sin imprimir estos mensajes"
 	@echo "		refresh		Permite volver a compilar los archivos sin modificarlos"
 	@echo "		doxy		Genera la documentación"
 	@echo "		zip		Genera el zip del proyecto"
 	@echo "		valgrind	Realiza un test por medio de valgrind"
-	@echo "		tests		Realiza todos los test del makefile"
+	@echo "		bigtest		Realiza un test que engloba a todos los test del makefile"
+	@echo "		infotests	Muestra todos los tests posibles"
+	@echo "		test<num>	Realiza el test <num>"
 	@echo "		help		Muestra esta ayuda"
 	@echo "		author		Información sobre el autor de este programa"
 	@echo "________________________________________________________________________________"
@@ -92,3 +112,13 @@ author:
 	@echo "(https://github.com/delightfulagony)" 
 	@echo "para la asignatura de Metodología de la Programación de la Universidad de Granada"
 	@echo "adaptado para la asignatura de Estructura de Computadores"
+	
+infotests:
+	@echo "________________________________________________________________________________"
+	@echo "Lista de tests posibles:"
+	@echo "		test1		Realiza una cronología a partir del archivo timeline_algorithms.txt"
+	@echo "		test2		Realiza una cronología a partir del archivo timeline_movies.txt"
+	@echo "		test3		Realiza una cronología a partir del archivo timeline_science.txt"
+	@echo "		test4		Realiza una cronología a partir del archivo timeline_worldhistory.txt"
+	@echo "________________________________________________________________________________"
+
