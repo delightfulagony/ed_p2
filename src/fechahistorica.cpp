@@ -88,6 +88,28 @@ fechaHistorica& fechaHistorica::operator=(const fechaHistorica& fechaH) {
 }
 
 std::istream& operator>>(std::istream& i, fechaHistorica& fechaH) {
+	int _anio;
+	char aux;
+	is >> _anio >> aux;
+	fechaHistorica aux(_anio);
+	
+	std::string cadenaEventos;
+	std::getline(is,cadenaEventos);
+	unsigned int ultimaAlmohadilla = 0;
+	unsigned int comienzoEvento = 0;
+	
+	while (ultimaAlmohadilla!=-1) {
+		std::string _evento;
+		ultimaAlmohadilla = cadenaEventosfind('#');
+		if (ultimaAlmohadilla!=-1) {
+			_evento = substr(comienzoEvento,ultimaAlmohadilla-comienzoEvento);
+		}	
+		else
+			_evento = substr(comienzoEvento,-1);
+		comienzoEvento = ultimaAlmohadilla + 1;
+		aux.asignarEvento(_evento);
+	}
+	return is;
 }
 
 std::ostream& operator<<(std::ostream& o, const fechaHistorica& fechaH) {
