@@ -14,7 +14,7 @@ SRC  = ./src
 OBJ  = ./obj
 INC  = ./include
 BIN  = ./bin
-DATA = ./datos
+DATA = ./data
 DOC  = ./doc
 ZIP  = ./zip
 
