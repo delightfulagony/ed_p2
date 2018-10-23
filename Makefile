@@ -73,7 +73,7 @@ zip: $(PROJECT)
 	rm -rf $(OBJ)/*
 	rm -rf $(DOC)/html $(DOC)/latex
 	rm -rf *.bgr
-	zip -r $(ZIP)/cronologia.zip *
+	zip -r $(ZIP)/$(PROJECT).zip *
 	
 valgrind: $(PROJECT)
 	valgrind $(VFLAGS) $(BIN)/$(PROJECT) -c $(VTEST) 
@@ -108,11 +108,10 @@ help:
 	@echo "________________________________________________________________________________"
 
 author:
-	@echo "Este es un proyecto realizado por Gonzalo Moreno Soto"
-	@echo "(https://github.com/delightfulagony)" 
-	@echo "para la asignatura de Metodología de la Programación de la Universidad de Granada"
-	@echo "adaptado para la asignatura de Estructura de Computadores"
-	
+	@echo "Este es un proyecto realizado por Gonzalo Moreno Soto (https://github.com/delightfulagony)"
+	@echo "y Manuel Gachs Ballegeer (https://github.com/Manuelbelgicano)" 
+	@echo "para la asignatura de Estructura de Datos de la Universidad de Granada"
+
 infotests:
 	@echo "________________________________________________________________________________"
 	@echo "Lista de tests posibles:"

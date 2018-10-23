@@ -6,6 +6,8 @@
  */
 
 #include "cronologia.h"
+#include "fechahistorica.h"
+#include <iostream>
 
 void cronologia::reservarMemoria(const unsigned int% _nFechas) {
 	liberarMemoria();
