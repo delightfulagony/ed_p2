@@ -8,7 +8,10 @@
  
 #ifndef __CRONOLOGIA
 #define __CRONOLOGIA
- 
+
+#include "fechahistorica.h"
+#include <string>
+
  /**
   * @brief T.D.A. cronologia
   * Una instancia @e c del tipo de dato abstracto @c cronologia es un objeto

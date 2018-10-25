@@ -1,6 +1,6 @@
 /**
  * @file fechahistorica.h
- * @brief Fichero fuente del TDA fechaHistorica
+ * @brief Fichero fuente del TDA fechahistorica
  * @author Manuel Gachs Ballegeer
  * @author Gonzalo Moreno Soto
  * @license: GPLv3
@@ -10,28 +10,28 @@
 #include <iostream>
 #include <string>
 
-void fechaHistorica::reservarMemoria(const unsigned int& _nEventos) {
+void fechahistorica::reservarMemoria(const unsigned int& _nEventos) {
 	liberarMemoria();
 	nEventos = _nEventos;
 	eventos = new std::string[nEventos];
 }
 
-void fechaHistorica::copiar(const fechaHistorica& copia) {
+void fechahistorica::copiar(const fechahistorica& copia) {
 	anio = copia.anio;
 	reservarMemoria(copia.nEventos);
 	for (size_t i=0;i<nEventos;i++)
 		eventos[i] = copia.eventos[i];
 }
 
-void fechaHistorica::liberarMemoria() {
+void fechahistorica::liberarMemoria() {
 	if (eventos!=NULL)
 		delete[] eventos;
 	anio = 1;
 	nEventos = 0;
 }
 
-void fechaHistorica::redimensionar(const unsigned int& t) {
-	fechaHistorica aux(*this);
+void fechahistorica::redimensionar(const unsigned int& t) {
+	fechahistorica aux(*this);
 	liberarMemoria();
 	reservarMemoria(t);
 	size_t min = (t<aux.getNumEventos())?t:aux.getNumEventos();
@@ -39,18 +39,18 @@ void fechaHistorica::redimensionar(const unsigned int& t) {
 		eventos[i] = aux.eventos[i];
 }
 
-fechaHistorica::fechaHistorica() {
+fechahistorica::fechahistorica() {
 	anio = 1;
 	nEventos = 0;
 }
 
-fechaHistorica::fechaHistorica(const int& _anio, const unsigned int& _nEventos=0) {
+fechahistorica::fechahistorica(const int& _anio, const unsigned int& _nEventos=0) {
 	anio = _anio;
 	if (_nEventos!=0)
 		reservarMemoria(_nEventos);
 }
 
-void fechaHistorica::asignarEvento(const std::string& nuevo, const int indice=-1) {
+void fechahistorica::asignarEvento(const std::string& nuevo, const int indice=-1) {
 	if (indice!=-1 && indice<nEventos)
 		eventos[indice] = nuevo;
 	else {
@@ -60,7 +60,7 @@ void fechaHistorica::asignarEvento(const std::string& nuevo, const int indice=-1
 	}
 }
 
-fechaHistorica& fechaHistorica::suma(const fechaHistorica& sumaFechaHistorica) {
+fechahistorica& fechahistorica::suma(const fechahistorica& sumaFechaHistorica) {
 	if (anio==sumaFechaHistorica.anio) {
 		unsigned int aux = nEventos;
 		for (size_t i=0;i<sumaFechaHistorica.nEventos;i++) {
@@ -74,7 +74,7 @@ fechaHistorica& fechaHistorica::suma(const fechaHistorica& sumaFechaHistorica) {
 	return *this;
 }
 
-int fechaHistorica::buscarEvento(const std::string& _evento) const {
+int fechahistorica::buscarEvento(const std::string& _evento) const {
 	int aux = -1;
 	for (size_t i=0;i<nEventos && aux==-1;i++)
 		if (_evento==evento[i])
@@ -82,16 +82,16 @@ int fechaHistorica::buscarEvento(const std::string& _evento) const {
 	return aux;
 }
 
-fechaHistorica& fechaHistorica::operator=(const fechaHistorica& fechaH) {
+fechahistorica& fechahistorica::operator=(const fechahistorica& fechaH) {
 	copiar(fechaH);
 	return *this;
 }
 
-std::istream& operator>>(std::istream& i, fechaHistorica& fechaH) {
+std::istream& operator>>(std::istream& i, fechahistorica& fechaH) {
 	int _anio;
 	char aux;
 	is >> _anio >> aux;
-	fechaHistorica aux(_anio);
+	fechahistorica aux(_anio);
 	
 	std::string cadenaEventos;
 	std::getline(is,cadenaEventos);
@@ -111,7 +111,7 @@ std::istream& operator>>(std::istream& i, fechaHistorica& fechaH) {
 	return is;
 }
 
-std::ostream& operator<<(std::ostream& o, const fechaHistorica& fechaH) {
+std::ostream& operator<<(std::ostream& o, const fechahistorica& fechaH) {
 	os << fechaH.getAnio();
 	for (size_t i=0;i<fechaH.getNumEventos();i++)
 		os << "#" << fechaH.getEvento(i);

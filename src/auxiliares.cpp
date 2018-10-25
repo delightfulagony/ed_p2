@@ -6,6 +6,7 @@
  * @license GPLv3
  */
 #include "auxiliares.h"
+#include "cronologia.h"
 #include <iostream>
 #include <fstream>
 #include <string>

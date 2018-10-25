@@ -1,6 +1,6 @@
 /**
  * @file fechahistorica.h
- * @brief Fichero cabecera del TDA fechaHistorica
+ * @brief Fichero cabecera del TDA fechahistorica
  * @author Manuel Gachs Ballegeer
  * @author Gonzalo Moreno Soto
  * @license: GPLv3
@@ -9,22 +9,24 @@
 #ifndef __FECHAHISTORICA
 #define __FECHAHISTORICA
 
+#include <string>
+
 /**
- * @brief T.D.A. fechaHistorica
- * Una instancia @e c del tipo de datos abstracto @c fechaHistorica es un objeto
+ * @brief T.D.A. fechahistorica
+ * Una instancia @e c del tipo de datos abstracto @c fechahistorica es un objeto
  * que representa a una fecha del calendario gregorianio junto con un conjunto de
  * eventos ocurridos durante ese año
  * @author Manuel Gachs Ballegeer
  * @author Gonzalo Moreno Soto
  * @date Octubre 2018
  */
-class fechaHistorica {
+class fechahistorica {
 private:
 	/**
-	 * @page repConjunto Rep del TDA fechaHistorica
+	 * @page repConjunto Rep del TDA fechahistorica
 	 * @section invConjunto Invariante de la representación
 	 * @section faConjunto Función de abstracción
-	 * Un objeto válido @e rep del TDA fechaHistorica representa al valor
+	 * Un objeto válido @e rep del TDA fechahistorica representa al valor
 	 * (rep.anio,rep.nEventos,rep.*eventos)
 	 */
 
@@ -34,29 +36,29 @@ private:
 
 	void reservarMemoria(const unsigned int& _nEventos);	///< Reserva memoria dinámica
 	void liberarMemoria(); 					///< Libera memoria dinámica
-	void copiar(const fechaHistorica& copia);		///< Crea una copia del objeto
+	void copiar(const fechahistorica& copia);		///< Crea una copia del objeto
 	void redimensionar(const unsigned int& t);		///< Redimensiona el array de eventos
 public:
 	/**
-	 * @brief Constructor por defecto de fechaHistorica . Crea la fecha 
+	 * @brief Constructor por defecto de fechahistorica . Crea la fecha 
 	 * 1 D.C con 0 eventos
 	 */
-	fechaHistorica();
+	fechahistorica();
 	/**
-	 * @brief Constructor por copia del fechaHistorica
+	 * @brief Constructor por copia del fechahistorica
 	 * @param copia Objeto a copiar por el constructor
 	 */
-	fechaHistorica(const fechaHistorica& copia) {copiar(copia);}
+	fechahistorica(const fechahistorica& copia) {copiar(copia);}
 	/**
-	 * @brief Constructor primitivo de fechaHistorica
+	 * @brief Constructor primitivo de fechahistorica
 	 * @param _anio Año del objeto
 	 * @param _nEventos Número de eventos en el año del objeto
 	 */
-	fechaHistorica(const int& _anio, const unsigned int& _nEventos=0);
+	fechahistorica(const int& _anio, const unsigned int& _nEventos=0);
 	/**
-	 * @brief Destructor de la clase fechaHistorica
+	 * @brief Destructor de la clase fechahistorica
 	 */
-	~fechaHistorica() {liberarMemoria();}	
+	~fechahistorica() {liberarMemoria();}	
 	/**
 	 * @brief Observador del parámetro anio
 	 * @return Devuelve el año 
@@ -73,7 +75,7 @@ public:
 	 * @return Evento en el lugar definido por índice
 	 * @pre El índice debe ser válido
 	 */
-	std::string getEvento(const unsigned int& indice) const {return evento[indice];}
+	std::string getEvento(const unsigned int& indice) const {return eventos[indice];}
 	/**
 	 * @brief Altera el evento al que se refiere el índice, si no se
 	 * proporciona índice, se añade al final.
@@ -83,14 +85,14 @@ public:
 	 */
 	void asignarEvento(const std::string& nuevo, const int indice=-1);
 	/**
-	 * @brief Suma al objeto otra fechaHistorica dada
+	 * @brief Suma al objeto otra fechahistorica dada
 	 * @pre Que ambos objetos tengan el mismo año
-	 * @param sumaFechaHistorica objeto fechaHistorica a sumar
+	 * @param sumaFechaHistorica objeto fechahistorica a sumar
 	 * @return La suma de los eventos de ambas fechas
 	 */
-	fechaHistorica& suma(const fechaHistorica& sumaFechaHistorica);
+	fechahistorica& suma(const fechahistorica& sumaFechaHistorica);
 	/**
-	 * @brief Busca un evento en el conjunto de eventos de fechaHistorica
+	 * @brief Busca un evento en el conjunto de eventos de fechahistorica
 	 * @param evento Evento a buscar
 	 * @return Devuelve la posición del evento en el conjunto de eventos y
 	 * @retval -1 si el evento no se encuentra en la fecha
@@ -98,34 +100,34 @@ public:
 	int buscarEvento(const std::string& _evento) const;
 	/**
 	 * @brief Sobrecarga del operador de asignación
-	 * @param fechaH fechaHistorica que se asigna
-	 * @return El objeto fechaHistorica asignado
+	 * @param fechaH fechahistorica que se asigna
+	 * @return El objeto fechahistorica asignado
 	 */
-	fechaHistorica& operator=(const fechaHistorica& fechaH);
+	fechahistorica& operator=(const fechahistorica& fechaH);
 	/**
 	 * @brief Sobrecarga del operador de suma
 	 * @param fechaH Segundo sumando de la operación
-	 * @return La suma de los dos objetos fechaHistorica
+	 * @return La suma de los dos objetos fechahistorica
 	 */
-	fechaHistorica& operator+(const fechaHistorica& fechaH) {return suma(fechaH);}
+	fechahistorica& operator+(const fechahistorica& fechaH) {return suma(fechaH);}
 	/**
 	 * @brief Sobrecarga del operador +=
 	 * @param fechaH Objeto con el que se realiza la operación
 	 * @return Resultado de la operación
 	 */
-	fechaHistorica& operator+=(const fechaHistoria& fechaH) {return suma(fechaH);}
+	fechahistorica& operator+=(const fechahistorica& fechaH) {return suma(fechaH);}
 	/**
 	 * @brief Sobrecarga de el operador de entrada
 	 */
-	friend std::istream& operator>>(std::istream& i, fechaHistorica& fechaH);
+	friend std::istream& operator>>(std::istream& i, fechahistorica& fechaH);
 	/**
 	 * @brief Sobrecarga del operador de salida. Imprime la fecha en el 
 	 * formato "Año#Evento[1]#...#Evento[n]"
 	 */
-	friend std::ostream& operator<<(std::ostream& o, const fechaHistorica& fechaH);
+	friend std::ostream& operator<<(std::ostream& o, const fechahistorica& fechaH);
 };
 
-std::istream& operator>>(std::istream& i, fechaHistorica& fechaH);
-std::ostream& operator<<(std::ostream& o, const fechaHistorica& fechaH);
+std::istream& operator>>(std::istream& i, fechahistorica& fechaH);
+std::ostream& operator<<(std::ostream& o, const fechahistorica& fechaH);
 
 #endif

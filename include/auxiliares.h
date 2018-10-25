@@ -9,6 +9,8 @@
 #ifndef __AUXILIARES
 #define __AUXILIARES
 
+#include "cronologia.h"
+
 /**
  * @brief Menu de opciones de cronologia
  * @return Opción seleccionada
