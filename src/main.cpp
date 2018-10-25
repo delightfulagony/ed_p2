@@ -25,6 +25,7 @@ int main(int argc, char * argv[]) {
 	//Rutina habitual del programa
 	char opt = 'q';
 	bool guardado = true;
+	bool exit = false;
 	do {
 		opt = menu();
 		switch(opt) {
@@ -38,10 +39,25 @@ int main(int argc, char * argv[]) {
 				mostrarCronologia(crono);
 				break;
 			case 'u':
-				unirNueva(total,guardado);
+				unirNueva(crono,guardado);
+				break;
+			case 'p':
+				periodoCrono(crono,guardado);
+				break;
+			case 'c':
+				claveCrono(crono,guardado);
+				break;
+			case 'e':
+				eliminaAnio(crono);
+				break;
+			case 'q':
+				exit = quit(guardado);
+				break;
+			default:
+				defaultCrono(opt);
 				break;
 		}
-	} while(opt!='q');
+	} while(!exit);
 	
 	return 0;
 }

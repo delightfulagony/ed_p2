@@ -12,7 +12,6 @@
 
 char menu() {
 	char aux = 'q';
-	std::cout<<"_______________________________________M E N U_______________________________________\n";
 	std::cout<<"Menu del programa:\n";
 	std::cout<<"	s	Salva la cronologia en el archivo seleccionado\n";
 	std::cout<<"	a	Muestra todos los eventos acaecidos en el anio seleccionado\n";
@@ -22,9 +21,20 @@ char menu() {
 	std::cout<<"	c	Crea una subcronologia a partir de una palabra clave\n";
 	std::cout<<"	e	Elimina un año de la cronologia\n";
 	std::cout<<"	q	Termina el programa\n"
-	std::cout<<"_____________________________________________________________________________________\n";
 	std::cin>>aux;
-	return aux;
+	return aux.tolower();
+}
+
+bool comprobacionGuardado(bool& guardado) {
+	char ans = 'y';
+	if (!guardado) {
+		ans = 'n';
+		std::cout<<"Hay cambios sin guardar, ¿quiere guardarlos?(y/n) ";
+		std::cin>>ans;
+		bool aux = (ans.tolower()=='y')?true:false;
+		guardado = aux?salvar(crono):true;
+	}
+	return guardado;
 }
 
 bool salvar(const cronologia& crono) {
@@ -72,10 +82,55 @@ void mostrarCronologia(const cronologia& crono) {
 }
 
 void unirNueva(cronologia& crono, bool& guardado) {
-	if (!guardado) {
-		char ans = 'y';
-		std::cout<<"Hay cambios sin guardar, ¿quiere guardarlos?(y/n) ";
+	comprobacionGuardado(guardado);
+	do {
+		std::string fichero;
+		std::cout<<"Introduzca la ruta de la cronologia a añadir\n";
+		std::cin>>fichero;
+		crono+=fichero;
+		ans = 'n';
+		std::cout<<"¿Desea añadir mas ficheros?(y/n) ";
 		std::cin>>ans;
-		bool aux = (ans.tolower()=='y')?true:false;
-		guardado = aux?salvar(crono):true;
+	} while(ans=='y');
+	return;
+}
 
+void periodoCrono(cronologia& crono, bool& guardado) {
+	comprobacionGuardado(guardado);
+	int anioDesde, anioHasta;
+	std::cout<<"Introduzca el periodo seleccionado(ex:1999 2018) ";
+	std::cin<<anioDesde<<anioHasta;
+	crono = crono.subCronologia(anioDesde,anioHasta);
+	return;
+}
+
+void claveCrono(cronologia& crono, bool& guardado) {
+	comprobacionGuardado(guardado);
+	std::string clave;
+	std::cout<<"Introduzca la clave de búsqueda: ";
+	std::cin>>clave;
+	crono = crono.cronologiaClave(clave);
+}
+
+void eliminaAnio(cronologia& crono, bool& guardado) {
+	comprobacionGuardado(guardado);
+	int anio;
+	std::cout<<"Introduzca el año a eliminar: ";
+	std::cin>>anio;
+	if (!crono.eliminaFecha(anio))
+		std::cout<<"Ha habido un error, por favor intentelo de nuevo\n";
+	return;
+}
+
+bool quit(bool& exit, bool& guardado) {
+	do {
+		exit = comprobacionGuardado(guardado);
+	} while(!guardado);
+	return exit;
+}
+
+void defaultCrono(char& opt) {
+	std::cout<<"Disculpe, no le he entendido, vuelva a introducir la opcion\n";
+	std::cin>>opt;
+	return;
+}

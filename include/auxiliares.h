@@ -10,14 +10,29 @@
 #define __AUXILIARES
 
 /**
- * @brief Muestra un mensaje de ayuda en pantalla
- */
-void ayuda();
-
-/**
  * @brief Menu de opciones de cronologia
  * @return Opción seleccionada
  */
 char menu();
+
+bool comprobacionGuardado(bool& guardado);
+
+bool salvar(const cronologia& crono);
+
+void mostrarEventos(const cronologia& crono);
+
+void mostrarCronologia(const cronologia& crono);
+
+void unirNueva(cronologia& crono, bool& guardado);
+
+void periodoCrono(cronologia& crono, bool& guardado);
+
+void claveCrono(cronologia& crono, bool& guardado);
+
+void eliminaAnio(cronologia& crono, bool& guardado);
+
+bool quit(bool& exit, bool& guardado);
+
+void defaultCrono(char& opt);
 
 #endif
