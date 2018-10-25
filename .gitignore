@@ -1,4 +1,5 @@
 *.out
 vgcore*
 *.o
-doc/*
+doc/html/
+doc/latex/
