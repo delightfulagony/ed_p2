@@ -42,7 +42,7 @@ bool salvar(const cronologia& crono) {
 	std::string fichero;
 	std::cout<<"Introduce la ruta del fichero de salida:\n";
 	std::cin>>fichero;
-	
+
 	std::ofstream fout(fichero);
 	bool aux = false;
 	if (fout.is_open()) {
@@ -63,8 +63,10 @@ void mostrarEventos(const cronologia& crono) {
 	int anio;
 	std::cout<<"Introduzca el anio:\n";
 	std::cin>>anio;
-
-	std::cout<<crono.getEventos(anio);
+	if (crono.estaFecha())
+		std::cout<<crono.getEventos(anio);
+	else
+		std::cout<<"El año que ha introducido no se encuentra en la cronologia\n";
 	return;
 }
 
@@ -123,11 +125,12 @@ void eliminaAnio(cronologia& crono, bool& guardado) {
 	return;
 }
 
-bool quit(bool& exit, bool& guardado) {
+bool quit(bool& guardado) {
+	bool aux = true;
 	do {
-		exit = comprobacionGuardado(guardado);
+		aux = comprobacionGuardado(guardado);
 	} while(!guardado);
-	return exit;
+	return aux;
 }
 
 void defaultCrono(char& opt) {

@@ -16,12 +16,12 @@ int main(int argc, char * argv[]) {
 		std::cout<<"Error: Añada al menos un archivo de cronologia\n";
 		return -1;
 	}
-	
+
 	//Calculo de la cronologia total a partir de los parametros de entrada
 	cronologia crono;
 	for(size_t i=1;i<argc;i++)
 		crono += argv[i];
-	
+
 	//Rutina habitual del programa
 	char opt = 'q';
 	bool guardado = true;
@@ -51,13 +51,13 @@ int main(int argc, char * argv[]) {
 				eliminaAnio(crono);
 				break;
 			case 'q':
-				exit = quit(guardado);
+				exit = quit(exit,guardado);
 				break;
 			default:
 				defaultCrono(opt);
 				break;
 		}
 	} while(!exit);
-	
+
 	return 0;
 }
