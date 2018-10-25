@@ -47,13 +47,16 @@ VTEST = $(DATA)/timeline_algorithms.txt
 
 all: $(PROJECT) help author
 
-$(PROJECT): $(OBJ)/fechaHistorica.o $(OBJ)/cronologia.o $(OBJ)/$(PROJECT).o 
+$(PROJECT): $(OBJ)/fechaHistorica.o $(OBJ)/cronologia.o $(OBJ)/auxiliares.o $(OBJ)/$(PROJECT).o 
 	$(CC) $(FLAGS) -o $(BIN)/$(PROJECT) $?
 
 $(OBJ)/fechaHistorica.o: $(SRC)/fechaHistorica.cpp $(INC)/fechaHistorica.h
 	$(CC) -I$(INC) -c -o $@ $<
 
 $(OBJ)/cronologia.o: $(SRC)/cronologia.cpp $(INC)/cronologia.h
+	$(CC) -I$(INC) -c -o $@ $<
+
+$(OBJ)/auxiliares.o: $(SRC)/auxiliares.cpp $(INC)/auxiliares.h
 	$(CC) -I$(INC) -c -o $@ $<
 
 $(OBJ)/$(PROJECT).o: $(SRC)/$(PROJECT).cpp

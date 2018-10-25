@@ -1,1 +1,4 @@
 *.out
+vgcore*
+*.o
+doc/*
