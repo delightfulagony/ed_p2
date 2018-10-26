@@ -51,7 +51,7 @@ int main(int argc, char * argv[]) {
 				eliminaAnio(crono);
 				break;
 			case 'q':
-				exit = quit(exit,guardado);
+				exit = quit(guardado);
 				break;
 			default:
 				defaultCrono(opt);
