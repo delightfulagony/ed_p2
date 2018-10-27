@@ -54,7 +54,7 @@ public:
 	 * @param _anio Año del objeto
 	 * @param _nEventos Número de eventos en el año del objeto
 	 */
-	fechahistorica(const int& _anio, const unsigned int& _nEventos=0);
+	fechahistorica(const int& _anio, const unsigned int& _nEventos);
 	/**
 	 * @brief Destructor de la clase fechahistorica
 	 */
@@ -83,7 +83,7 @@ public:
 	 * @param indice Lugar en el que introducir el evento, si es -1 se
 	 * añade el evento al final.
 	 */
-	void asignarEvento(const std::string& nuevo, const int indice=-1);
+	void asignarEvento(const std::string& nuevo, const int indice);
 	/**
 	 * @brief Suma al objeto otra fechahistorica dada
 	 * @pre Que ambos objetos tengan el mismo año
