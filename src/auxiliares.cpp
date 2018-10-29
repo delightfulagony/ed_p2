@@ -126,10 +126,10 @@ void eliminaAnio(cronologia& crono, bool& guardado) {
 	return;
 }
 
-bool quit(bool& guardado) {
+bool quit(cronologia& crono,bool& guardado) {
 	bool aux = true;
 	do {
-		aux = comprobacionGuardado(guardado);
+		aux = comprobacionGuardado(crono,guardado);
 	} while(!guardado);
 	return aux;
 }

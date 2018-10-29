@@ -79,7 +79,7 @@ void eliminaAnio(cronologia& crono, bool& guardado);
  * @return @retval true Si se va a salir del programa y @retval false Si ha habido
  * error en algún punto
  */
-bool quit(bool& guardado);
+bool quit(cronologia& crono,bool& guardado);
 
 /**
  * @brief Ayuda al usuario en caso de error en el menu

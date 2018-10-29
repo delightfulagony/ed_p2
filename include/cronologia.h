@@ -99,7 +99,7 @@ public:
 	 * @return @retval true Si se ha realizado la operación exitosamente
 	 * @retval false Si ha ocurrido un error durante la operación
 	 */
-	void eliminaFecha(const int& anio);
+	bool eliminaFecha(const int& anio);
 	/**
 	 * @brief Realiza la unión de dos cronologías
 	 * @param sumaCronologia Cronología que se quiere añadir a la actual

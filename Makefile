@@ -5,7 +5,7 @@
 # @license GPLv3
 
 #Nombre del proyecto
-PROJECT = Cronologia
+PROJECT = practica2
 
 # Compilador usado
 CC = g++

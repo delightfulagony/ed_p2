@@ -95,13 +95,17 @@ void cronologia::asignarFecha(const fechahistorica& fecha) {
 	return;
 }
 
-void cronologia::eliminaFecha(const int& anio) {
+bool cronologia::eliminaFecha(const int& anio) {
+	bool ans = false;
 	for (std::size_t i=0;i<nFechas;i++) {
-		if (fechas[i].getAnio()==anio)
+		if (fechas[i].getAnio()==anio) {
 			fechas[i]=fechas[nFechas-1];
+			ans = true;
+		}
 	}
 	resize(nFechas-1);
 	ordenaCronologia();
+	return ans;
 }
 
 cronologia& cronologia::unionCronologias(const cronologia& sumaCronologia) {

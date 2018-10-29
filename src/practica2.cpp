@@ -48,10 +48,10 @@ int main(int argc, char * argv[]) {
 				claveCrono(crono,guardado);
 				break;
 			case 'e':
-				eliminaAnio(crono);
+				eliminaAnio(crono,guardado);
 				break;
 			case 'q':
-				exit = quit(guardado);
+				exit = quit(crono,guardado);
 				break;
 			default:
 				defaultCrono(opt);
