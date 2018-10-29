@@ -32,7 +32,7 @@ private:
   	 */
   	 
 	unsigned int nFechas;	    ///< Número de fechas en la cronologia
-	fechaHistorica *fechas;	    ///< Conjunto de fechas con eventos
+	fechahistorica *fechas;	    ///< Conjunto de fechas con eventos
 	
 	void reservarMemoria(const unsigned int& _nFechas);	///< Reserva memoria dinámica
 	void liberarMemoria();					///< Libera memoria dinámica
@@ -76,7 +76,7 @@ public:
 	 * @return La fecha con todos sus eventos. Se devuelve una fecha
 	 * vacía si no se encuentra dentro de la cronología
 	 */
-	fechaHistorica getEventos(const int& anio) const;
+	fechahistorica getEventos(const int& anio) const;
 	/**
 	 * @brief Comprueba si una determinada fecha se encuentra en la
 	 * cronología
@@ -92,7 +92,7 @@ public:
 	 * @return @retval true Si se ha realizado la operación exitosamente
 	 * @retval false Si ha ocurrido un error durante la operación
 	 */
-	bool asignarFecha(const fechaHistorica& fecha);
+	bool asignarFecha(const fechahistorica& fecha);
 	/**
 	 * @brief Elimina una fecha con sus eventos a la cronología
 	 * @param anio Año que se quiere eliminar de la cronología

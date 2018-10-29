@@ -9,10 +9,10 @@
 #include "fechahistorica.h"
 #include <iostream>
 
-void cronologia::reservarMemoria(const unsigned int% _nFechas) {
+void cronologia::reservarMemoria(const unsigned int& _nFechas) {
 	liberarMemoria();
 	nFechas = _nFechas;
-	fechas = new fechaHistorica[_nFechas];
+	fechas = new fechahistorica[_nFechas];
 }
 
 void cronologia::liberarMemoria() {
@@ -30,7 +30,7 @@ void cronologia::copiar(const cronologia& copia) {
 }
 
 void cronologia::resize(const unsigned int& tamanio) {
-	fechaHistorica aux(*this);
+	cronologia aux(*this);
 	reservarMemoria(tamanio);
 	std::size_t min = (aux.getNFechas()?tamanio:aux.getNFechas);
 	for (std::size_t i=0;i<min;i++)
@@ -39,7 +39,7 @@ void cronologia::resize(const unsigned int& tamanio) {
 }
 
 void cronologia::ordenaCronologia() {
-	fechaHistorica aux;
+	fechahistorica aux;
 	for (std::size_t i=0;i<nFechas;i++) {
 		for (std::size_t j=nFechas-1;j>=0;j--) {
 			if (fechas[i].getAnio() > fechas[j].getAnio()) {
@@ -70,7 +70,7 @@ int cronologia::buscarEvento(const std::string& evento) const {
 	}
 }
 
-fechaHistorica cronologia::getEventos(const int& anio) const {
+fechahistorica cronologia::getEventos(const int& anio) const {
 	for (std::size_t i=0;i<nFechas;i++) {
 		if (fechas[i].getAnio() == anio)
 			return fechas[i];
@@ -85,7 +85,7 @@ bool cronologia::estaFecha(const int& anio) {
 	return false;
 }
 
-bool cronologia::asignarFecha(const fechaHistorica& fecha) {
+bool cronologia::asignarFecha(const fechahistorica& fecha) {
 	resize(nFechas+1);
 	fechas[nFechas-1]=fecha;
 }
@@ -124,7 +124,7 @@ cronologia& cronologia::subCronologia(const int& anioDesde, const int& anioHasta
 }
 cronologia& cronologia::cronologiaClave(const std::string& clave) const {
 	cronologia subCrono;
-	fechaHistorica auxFecha;
+	fechahistorica auxFecha;
 	std::size_t encontrado;
 	for (std::size_t i=0;i<nFechas;i++) {
 		for (std::size_t j=0;j<fechas[i].getNumEventos();j++) {
