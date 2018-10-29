@@ -71,13 +71,14 @@ fechahistorica& fechahistorica::suma(const fechahistorica& sumaFechaHistorica) {
 			if (!repetido)
 				asignarEvento(sumaFechaHistorica.eventos[i]);
 		}
+	}
 	return *this;
 }
 
 int fechahistorica::buscarEvento(const std::string& _evento) const {
 	int aux = -1;
 	for (size_t i=0;i<nEventos && aux==-1;i++)
-		if (_evento==evento[i])
+		if (_evento==eventos[i])
 			aux = i;
 	return aux;
 }
@@ -87,11 +88,11 @@ fechahistorica& fechahistorica::operator=(const fechahistorica& fechaH) {
 	return *this;
 }
 
-std::istream& operator>>(std::istream& i, fechahistorica& fechaH) {
+std::istream& operator>>(std::istream& is,fechahistorica& fechaH) {
 	int _anio;
 	char aux;
 	is >> _anio >> aux;
-	fechahistorica aux(_anio);
+	fechahistorica faux(_anio);
 	
 	std::string cadenaEventos;
 	std::getline(is,cadenaEventos);
@@ -100,7 +101,7 @@ std::istream& operator>>(std::istream& i, fechahistorica& fechaH) {
 	
 	while (ultimaAlmohadilla!=-1) {
 		std::string _evento;
-		ultimaAlmohadilla = cadenaEventosfind('#');
+		ultimaAlmohadilla = cadenaEventos.find('#');
 		if (ultimaAlmohadilla!=-1)
 			_evento = substr(comienzoEvento,ultimaAlmohadilla-comienzoEvento);
 		else
