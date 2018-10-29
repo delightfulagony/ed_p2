@@ -73,10 +73,12 @@ int cronologia::buscarEvento(const std::string& evento) const {
 */
 
 fechahistorica cronologia::getEventos(const int& anio) const {
+	fechahistorica aux;
 	for (std::size_t i=0;i<nFechas;i++) {
 		if (fechas[i].getAnio() == anio)
-			return fechas[i];
+			aux = fechas[i];
 	}
+	return aux;
 }
 
 bool cronologia::estaFecha(const int& anio) const {
@@ -125,7 +127,7 @@ cronologia cronologia::subCronologia(const int& anioDesde, const int& anioHasta)
 	subCrono.ordenaCronologia();
 	return subCrono;
 }
-cronologia& cronologia::cronologiaClave(const std::string& clave) const {
+cronologia cronologia::cronologiaClave(const std::string& clave) const {
 	cronologia subCrono;
 	fechahistorica auxFecha;
 	std::size_t encontrado;
@@ -138,7 +140,6 @@ cronologia& cronologia::cronologiaClave(const std::string& clave) const {
 		subCrono.asignarFecha(auxFecha);
 	}
 	return subCrono;
-
 }
 
 cronologia& cronologia::operator=(const cronologia& crono) {
@@ -146,21 +147,9 @@ cronologia& cronologia::operator=(const cronologia& crono) {
 	return *this;
 }
 
-cronologia& operator+(const cronologia& crono) {
-	cronologia resultado;
-	resultado.copiar(*this);
-	resultado.unionCronologias(crono);
-	return resultado;
-}
-
-cronologia& operator+=(const cronologia& crono) {
-	unionCronologias(crono);
-	return *this;
-} 
-
 std::ostream& operator<<(std::ostream& os, const cronologia& crono) {
 	for (std::size_t i=0;i<crono.nFechas;i++)
-		os << crono.fechas[i] << endl;
+		os << crono.fechas[i] << std::endl;
 	return os;
 }
 

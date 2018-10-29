@@ -120,7 +120,7 @@ public:
 	 * @param clave Palabra a buscar
 	 * @return Cronologia de eventos relacionados con la palabra
 	 */
-	cronologia& cronologiaClave(const std::string& clave) const;
+	cronologia cronologiaClave(const std::string& clave) const;
 	/**
 	 * @brief Sobrecarga del operador de asignación
 	 * @param crono Cronología que se asigna a la creada
@@ -132,13 +132,13 @@ public:
 	 * @param crono Segundo sumando de la operación
 	 * @return La suma de las dos cronologías
 	 */
-	cronologia& operator+(const cronologia& crono);
+	cronologia& operator+(const cronologia& crono) {return unionCronologias(crono);}
 	/**
 	 * @brief Sobrecarga del operador +=
 	 * @param crono Objeto con el que se realiza la operación
 	 * @return Resultado de la operación
 	 */
-	cronologia& operator+=(const cronologia& crono);
+	cronologia& operator+=(const cronologia& crono) {return unionCronologias(crono);}
 	/**
 	 * @brief Sobrecarga de el operador de entrada
 	 */
