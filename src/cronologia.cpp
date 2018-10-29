@@ -79,7 +79,7 @@ fechahistorica cronologia::getEventos(const int& anio) const {
 	}
 }
 
-bool cronologia::estaFecha(const int& anio) {
+bool cronologia::estaFecha(const int& anio) const {
 	for (std::size_t i=0;i<nFechas;i++) {
 		if (fechas[i].getAnio()==anio)
 			return true;
@@ -87,27 +87,28 @@ bool cronologia::estaFecha(const int& anio) {
 	return false;
 }
 
-bool cronologia::asignarFecha(const fechahistorica& fecha) {
+void cronologia::asignarFecha(const fechahistorica& fecha) {
 	resize(nFechas+1);
 	fechas[nFechas-1]=fecha;
+	return;
 }
 
-bool cronologia::eliminaFecha(const int& anio) {
+void cronologia::eliminaFecha(const int& anio) {
 	for (std::size_t i=0;i<nFechas;i++) {
 		if (fechas[i].getAnio()==anio)
 			fechas[i]=fechas[nFechas-1];
 	}
 	resize(nFechas-1);
-	ordenaCronologia;
+	ordenaCronologia();
 }
 
 cronologia& cronologia::unionCronologias(const cronologia& sumaCronologia) {
 	for (std::size_t i=0;i<nFechas;i++) {
 		for (std::size_t j=0;j<sumaCronologia.nFechas;j++) {
-			if (fechas[i].getAnio()==sumaCronologia[j].getAnio()) {
+			if (fechas[i].getAnio()==sumaCronologia.fechas[j].getAnio()) {
 				fechas[i] += sumaCronologia.fechas[j];
 			} else {
-				asignarFecha(sumaCronologia.fechas[j];
+				asignarFecha(sumaCronologia.fechas[j]);
 			}
 		}
 	}
@@ -115,14 +116,14 @@ cronologia& cronologia::unionCronologias(const cronologia& sumaCronologia) {
 	return *this;
 }
 
-cronologia& cronologia::subCronologia(const int& anioDesde, const int& anioHasta) const {
+cronologia cronologia::subCronologia(const int& anioDesde, const int& anioHasta) const {
 	cronologia subCrono;
 	for (std::size_t i=0;i<nFechas;i++) {
 		if (fechas[i].getAnio()>=anioDesde and fechas[i].getAnio()<=anioHasta)
-			asignarFecha(fechas[i]);
+			subCrono.asignarFecha(fechas[i]);
 	}
-	ordenaCronologia();
-	return *this;
+	subCrono.ordenaCronologia();
+	return subCrono;
 }
 cronologia& cronologia::cronologiaClave(const std::string& clave) const {
 	cronologia subCrono;
@@ -130,7 +131,7 @@ cronologia& cronologia::cronologiaClave(const std::string& clave) const {
 	std::size_t encontrado;
 	for (std::size_t i=0;i<nFechas;i++) {
 		for (std::size_t j=0;j<fechas[i].getNumEventos();j++) {
-			encontrado=fechas[i]getEvento(j).find(clave);
+			encontrado=fechas[i].getEvento(j).find(clave);
 			if (encontrado!=std::string::npos)
 				auxFecha.asignarEvento(fechas[i].getEvento(j));
 		}

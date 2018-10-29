@@ -1,5 +1,5 @@
 /**
- * @file cronologia.h
+ * @file cronologia
  * @brief Fichero cabecera del TDA cronologia
  * @author Manuel Gachs Ballegeer
  * @author Gonzalo Moreno Soto
@@ -92,14 +92,14 @@ public:
 	 * @return @retval true Si se ha realizado la operación exitosamente
 	 * @retval false Si ha ocurrido un error durante la operación
 	 */
-	bool asignarFecha(const fechahistorica& fecha);
+	void asignarFecha(const fechahistorica& fecha);
 	/**
 	 * @brief Elimina una fecha con sus eventos a la cronología
 	 * @param anio Año que se quiere eliminar de la cronología
 	 * @return @retval true Si se ha realizado la operación exitosamente
 	 * @retval false Si ha ocurrido un error durante la operación
 	 */
-	bool eliminaFecha(const int& anio);
+	void eliminaFecha(const int& anio);
 	/**
 	 * @brief Realiza la unión de dos cronologías
 	 * @param sumaCronologia Cronología que se quiere añadir a la actual
@@ -113,7 +113,7 @@ public:
 	 * @param anioHasta Año en el que termina la (sub)cronologia
 	 * @return (Sub)cronologia resultante
 	 */
-	cronologia& subCronologia(const int& anioDesde, const int& anioHasta) const;
+	cronologia subCronologia(const int& anioDesde, const int& anioHasta) const;
 	/**
 	 * @brief Obtiene la (sub)cronologia de eventos historicos asociados
 	 * a una palabra clave.
