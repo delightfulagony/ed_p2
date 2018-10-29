@@ -122,6 +122,11 @@ public:
 	 */
 	cronologia cronologiaClave(const std::string& clave) const;
 	/**
+	 * @brief Añade una cronologia a partir de un archivo
+	 * @param fichero El fichero donde se encuentra la cronologia
+	 */
+	void deArchivo(const char fichero[]);
+	/**
 	 * @brief Sobrecarga del operador de asignación
 	 * @param crono Cronología que se asigna a la creada
 	 * @return La cronología asignada

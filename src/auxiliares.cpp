@@ -88,14 +88,16 @@ void unirNueva(cronologia& crono, bool& guardado) {
 	char ans;
 	comprobacionGuardado(crono,guardado);
 	do {
-		cronologia fichero;
+		char fichero[100];
 		std::cout<<"Introduzca la ruta de la cronologia a añadir\n";
 		std::cin>>fichero;
-		crono+=fichero;
+		cronologia aux;
+		aux.deArchivo(fichero);
+		crono += aux;
 		ans = 'n';
 		std::cout<<"¿Desea añadir mas ficheros?(y/n) ";
 		std::cin>>ans;
-	} while(ans=='y');
+	} while(tolower(ans)=='y');
 	return;
 }
 

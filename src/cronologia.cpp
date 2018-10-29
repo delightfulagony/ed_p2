@@ -2,12 +2,14 @@
  * @file cronologia.h
  * @brief Fichero fuente del TDA cronologia
  * @author Gonzalo Moreno Soto
+ * @author Manuel Gachs Ballegeer
  * @license GPLv3
  */
 
 #include "cronologia.h"
 #include "fechahistorica.h"
 #include <iostream>
+#include <fstream>
 
 void cronologia::reservarMemoria(const unsigned int& _nFechas) {
 	liberarMemoria();
@@ -131,6 +133,7 @@ cronologia cronologia::subCronologia(const int& anioDesde, const int& anioHasta)
 	subCrono.ordenaCronologia();
 	return subCrono;
 }
+
 cronologia cronologia::cronologiaClave(const std::string& clave) const {
 	cronologia subCrono;
 	fechahistorica auxFecha;
@@ -144,6 +147,16 @@ cronologia cronologia::cronologiaClave(const std::string& clave) const {
 		subCrono.asignarFecha(auxFecha);
 	}
 	return subCrono;
+}
+
+void cronologia::deArchivo(const char fichero[]) {
+	std::ifstream fin(fichero);
+	if (fin)
+		fin >> *this;
+	else
+		std::cout<<"Error en la apertura del fichero\n";
+	fin.close();
+	return;
 }
 
 cronologia& cronologia::operator=(const cronologia& crono) {

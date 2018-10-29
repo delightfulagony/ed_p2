@@ -19,8 +19,11 @@ int main(int argc, char * argv[]) {
 
 	//Calculo de la cronologia total a partir de los parametros de entrada
 	cronologia crono;
-	for(size_t i=1;i<argc;i++)
-		crono += argv[i];
+	for(size_t i=1;i<argc;i++) {
+		cronologia aux;
+		aux.deArchivo(argv[i]);
+		crono += aux;
+	}
 
 	//Rutina habitual del programa
 	char opt = 'q';
