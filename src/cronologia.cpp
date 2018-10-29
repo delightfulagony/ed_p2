@@ -32,7 +32,7 @@ void cronologia::copiar(const cronologia& copia) {
 void cronologia::resize(const unsigned int& tamanio) {
 	cronologia aux(*this);
 	reservarMemoria(tamanio);
-	std::size_t min = (aux.getNFechas()?tamanio:aux.getNFechas);
+	std::size_t min = (aux.getNFechas()?tamanio:aux.getNFechas());
 	for (std::size_t i=0;i<min;i++)
 		fechas[i] = aux.getEventos(i);
 	nFechas=tamanio;
@@ -61,6 +61,7 @@ cronologia::cronologia(const unsigned int& _nFechas) {
 	reservarMemoria(nFechas);
 }
 
+/*
 int cronologia::buscarEvento(const std::string& evento) const {
 	for (std::size_t i=0;i<nFechas;i++) {
 		for(std::size_t j=0;j<fechas[i].getNumEventos();j++) {
@@ -69,6 +70,7 @@ int cronologia::buscarEvento(const std::string& evento) const {
 		}
 	}
 }
+*/
 
 fechahistorica cronologia::getEventos(const int& anio) const {
 	for (std::size_t i=0;i<nFechas;i++) {
