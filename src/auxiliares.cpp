@@ -21,18 +21,18 @@ char menu() {
 	std::cout<<"	p	Crea una subcronologia en el periodo de los anios dados\n";
 	std::cout<<"	c	Crea una subcronologia a partir de una palabra clave\n";
 	std::cout<<"	e	Elimina un año de la cronologia\n";
-	std::cout<<"	q	Termina el programa\n"
+	std::cout<<"	q	Termina el programa\n";
 	std::cin>>aux;
-	return aux.tolower();
+	return tolower(aux);
 }
 
-bool comprobacionGuardado(bool& guardado) {
+bool comprobacionGuardado(cronologia& crono,bool& guardado) {
 	char ans = 'y';
 	if (!guardado) {
 		ans = 'n';
 		std::cout<<"Hay cambios sin guardar, ¿quiere guardarlos?(y/n) ";
 		std::cin>>ans;
-		bool aux = (ans.tolower()=='y')?true:false;
+		bool aux = (tolower(ans)=='y')?true:false;
 		guardado = aux?salvar(crono):true;
 	}
 	return guardado;
@@ -47,7 +47,7 @@ bool salvar(const cronologia& crono) {
 	bool aux = false;
 	if (fout.is_open()) {
 		std::cout<<"Abriendo fichero\n";
-		std::fout<<crono;
+		fout<<crono;
 		aux = true;
 	}
 	if (!aux) {
@@ -63,7 +63,7 @@ void mostrarEventos(const cronologia& crono) {
 	int anio;
 	std::cout<<"Introduzca el anio:\n";
 	std::cin>>anio;
-	if (crono.estaFecha())
+	if (crono.estaFecha(anio))
 		std::cout<<crono.getEventos(anio);
 	else
 		std::cout<<"El año que ha introducido no se encuentra en la cronologia\n";
@@ -78,16 +78,17 @@ void mostrarCronologia(const cronologia& crono) {
 		std::cin>>ans;
 	}
 
-	bool aux = (ans.tolower()=='y')?true:false;
+	bool aux = (tolower(ans)=='y')?true:false;
 	if (aux)
 		std::cout<<crono;
 	return;
 }
 
 void unirNueva(cronologia& crono, bool& guardado) {
-	comprobacionGuardado(guardado);
+	char ans;
+	comprobacionGuardado(crono,guardado);
 	do {
-		std::string fichero;
+		cronologia fichero;
 		std::cout<<"Introduzca la ruta de la cronologia a añadir\n";
 		std::cin>>fichero;
 		crono+=fichero;
@@ -99,16 +100,16 @@ void unirNueva(cronologia& crono, bool& guardado) {
 }
 
 void periodoCrono(cronologia& crono, bool& guardado) {
-	comprobacionGuardado(guardado);
+	comprobacionGuardado(crono,guardado);
 	int anioDesde, anioHasta;
 	std::cout<<"Introduzca el periodo seleccionado(ex:1999 2018) ";
-	std::cin<<anioDesde<<anioHasta;
+	std::cin>>anioDesde>>anioHasta;
 	crono = crono.subCronologia(anioDesde,anioHasta);
 	return;
 }
 
 void claveCrono(cronologia& crono, bool& guardado) {
-	comprobacionGuardado(guardado);
+	comprobacionGuardado(crono,guardado);
 	std::string clave;
 	std::cout<<"Introduzca la clave de búsqueda: ";
 	std::cin>>clave;
@@ -116,7 +117,7 @@ void claveCrono(cronologia& crono, bool& guardado) {
 }
 
 void eliminaAnio(cronologia& crono, bool& guardado) {
-	comprobacionGuardado(guardado);
+	comprobacionGuardado(crono,guardado);
 	int anio;
 	std::cout<<"Introduzca el año a eliminar: ";
 	std::cin>>anio;

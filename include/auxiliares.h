@@ -23,7 +23,7 @@ char menu();
  * @return @retval true Si se ha guardado la cronologia o si no se quiere guardar y @retval false
  * si ha habido un fallo durante el guardado
  */
-bool comprobacionGuardado(bool& guardado);
+bool comprobacionGuardado(cronologia& crono,bool& guardado);
 
 /**
  * @brief Guarda una cronologia en un archivo seleccionado
