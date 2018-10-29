@@ -103,19 +103,20 @@ std::istream& operator>>(std::istream& is,fechahistorica& fechaH) {
 		std::string _evento;
 		ultimaAlmohadilla = cadenaEventos.find('#');
 		if (ultimaAlmohadilla!=-1)
-			_evento = substr(comienzoEvento,ultimaAlmohadilla-comienzoEvento);
+			_evento = cadenaEventos.substr(comienzoEvento,ultimaAlmohadilla-comienzoEvento);
 		else
-			_evento = substr(comienzoEvento,-1);
+			_evento = cadenaEventos.substr(comienzoEvento,-1);
 		comienzoEvento = ultimaAlmohadilla + 1;
-		aux.asignarEvento(_evento);
+		faux.asignarEvento(_evento);
 	}
+	fechaH = faux;
 	return is;
 }
 
-std::ostream& operator<<(std::ostream& o, const fechahistorica& fechaH) {
+std::ostream& operator<<(std::ostream& os, const fechahistorica& fechaH) {
 	os << fechaH.getAnio();
 	for (size_t i=0;i<fechaH.getNumEventos();i++)
 		os << "#" << fechaH.getEvento(i);
-	os << endl;
+	os << std::endl;
 	return os;
 }

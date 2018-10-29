@@ -119,15 +119,15 @@ public:
 	/**
 	 * @brief Sobrecarga de el operador de entrada
 	 */
-	friend std::istream& operator>>(std::istream& i, fechahistorica& fechaH);
+	friend std::istream& operator>>(std::istream& is, fechahistorica& fechaH);
 	/**
 	 * @brief Sobrecarga del operador de salida. Imprime la fecha en el 
 	 * formato "Año#Evento[1]#...#Evento[n]"
 	 */
-	friend std::ostream& operator<<(std::ostream& o, const fechahistorica& fechaH);
+	friend std::ostream& operator<<(std::ostream& os, const fechahistorica& fechaH);
 };
 
-std::istream& operator>>(std::istream& i, fechahistorica& fechaH);
-std::ostream& operator<<(std::ostream& o, const fechahistorica& fechaH);
+std::istream& operator>>(std::istream& is, fechahistorica& fechaH);
+std::ostream& operator<<(std::ostream& os, const fechahistorica& fechaH);
 
 #endif
