@@ -44,13 +44,13 @@ fechahistorica::fechahistorica() {
 	nEventos = 0;
 }
 
-fechahistorica::fechahistorica(const int& _anio, const unsigned int& _nEventos=0) {
+fechahistorica::fechahistorica(const int& _anio, const unsigned int& _nEventos) {
 	anio = _anio;
 	if (_nEventos!=0)
 		reservarMemoria(_nEventos);
 }
 
-void fechahistorica::asignarEvento(const std::string& nuevo, const int indice=-1) {
+void fechahistorica::asignarEvento(const std::string& nuevo, const int indice) {
 	if (indice!=-1 && indice<nEventos)
 		eventos[indice] = nuevo;
 	else {
