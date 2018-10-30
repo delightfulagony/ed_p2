@@ -40,7 +40,7 @@ void fechahistorica::redimensionar(const unsigned int& t) {
 }
 
 fechahistorica::fechahistorica() {
-	anio = 1;
+	anio = -1;
 	nEventos = 0;
 }
 
@@ -75,12 +75,15 @@ fechahistorica& fechahistorica::suma(const fechahistorica& sumaFechaHistorica) {
 	return *this;
 }
 
-int fechahistorica::buscarEvento(const std::string& _evento) const {
-	int aux = -1;
-	for (size_t i=0;i<nEventos && aux==-1;i++)
-		if (_evento==eventos[i])
-			aux = i;
-	return aux;
+fechahistorica fechahistorica::fechaClave(const std::string& palabra) const {
+	fechahistorica fpalabra;
+	for (size_t i=0;i<nEventos;i++)
+		if (eventos[i].find(palabra)!=std::string::npos)
+			fpalabra.asignarEvento(eventos[i]);
+	if (fpalabra.nEventos>0)
+		fpalabra.anio = anio;
+	
+	return fpalabra;
 }
 
 fechahistorica& fechahistorica::operator=(const fechahistorica& fechaH) {

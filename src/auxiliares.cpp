@@ -22,6 +22,7 @@ char menu() {
 	std::cout<<"	c	Crea una subcronologia a partir de una palabra clave\n";
 	std::cout<<"	e	Elimina un año de la cronologia\n";
 	std::cout<<"	q	Termina el programa\n";
+	std::cout<<"Su elección: ";
 	std::cin>>aux;
 	return tolower(aux);
 }
@@ -40,13 +41,13 @@ bool comprobacionGuardado(cronologia& crono,bool& guardado) {
 
 bool salvar(const cronologia& crono) {
 	std::string fichero;
-	std::cout<<"Introduce la ruta del fichero de salida:\n";
+	std::cout<<"Introduce la ruta del fichero de salida: \n";
 	std::cin>>fichero;
 
 	std::ofstream fout(fichero);
 	bool aux = false;
 	if (fout.is_open()) {
-		std::cout<<"Abriendo fichero\n";
+		std::cout<<"Abriendo fichero...\n";
 		fout<<crono;
 		aux = true;
 	}
@@ -61,7 +62,7 @@ bool salvar(const cronologia& crono) {
 
 void mostrarEventos(const cronologia& crono) {
 	int anio;
-	std::cout<<"Introduzca el anio:\n";
+	std::cout<<"Introduzca el anio: ";
 	std::cin>>anio;
 	if (crono.estaFecha(anio))
 		std::cout<<crono.getEventos(anio);
@@ -73,7 +74,7 @@ void mostrarEventos(const cronologia& crono) {
 void mostrarCronologia(const cronologia& crono) {
 	char ans = 'y';
 	if (crono.getNFechas() > 15) {
-		std::cout<<"Se mostraran "<<crono.getNFechas()<<" lineas.\n";
+		std::cout<<"Se mostraran "<<crono.getNFechas()<<" lineas. ";
 		std::cout<<"¿Esta seguro?(y/n) ";
 		std::cin>>ans;
 	}
@@ -89,7 +90,7 @@ void unirNueva(cronologia& crono, bool& guardado) {
 	comprobacionGuardado(crono,guardado);
 	do {
 		char fichero[100];
-		std::cout<<"Introduzca la ruta de la cronologia a añadir\n";
+		std::cout<<"Introduzca la ruta de la cronologia a añadir: ";
 		std::cin>>fichero;
 		cronologia aux;
 		aux.deArchivo(fichero);
@@ -104,7 +105,7 @@ void unirNueva(cronologia& crono, bool& guardado) {
 void periodoCrono(cronologia& crono, bool& guardado) {
 	comprobacionGuardado(crono,guardado);
 	int anioDesde, anioHasta;
-	std::cout<<"Introduzca el periodo seleccionado(ex:1999 2018) ";
+	std::cout<<"Introduzca el periodo seleccionado(ex:1999 2018): ";
 	std::cin>>anioDesde>>anioHasta;
 	crono = crono.subCronologia(anioDesde,anioHasta);
 	return;
@@ -137,7 +138,7 @@ bool quit(cronologia& crono,bool& guardado) {
 }
 
 void defaultCrono(char& opt) {
-	std::cout<<"Disculpe, no le he entendido, vuelva a introducir la opcion\n";
+	std::cout<<"Disculpe, no le he entendido, vuelva a introducir la opcion: ";
 	std::cin>>opt;
 	return;
 }

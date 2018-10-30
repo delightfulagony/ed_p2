@@ -40,8 +40,7 @@ private:
 	void redimensionar(const unsigned int& t);		///< Redimensiona el array de eventos
 public:
 	/**
-	 * @brief Constructor por defecto de fechahistorica . Crea la fecha 
-	 * 1 D.C con 0 eventos
+	 * @brief Constructor por defecto de fechahistorica. Crea la fecha imposible -1 con 0 eventos
 	 */
 	fechahistorica();
 	/**
@@ -92,12 +91,13 @@ public:
 	 */
 	fechahistorica& suma(const fechahistorica& sumaFechaHistorica);
 	/**
-	 * @brief Busca un evento en el conjunto de eventos de fechahistorica
-	 * @param evento Evento a buscar
-	 * @return Devuelve la posición del evento en el conjunto de eventos y
-	 * @retval -1 si el evento no se encuentra en la fecha
+	 * @brief Crea una nueva instancia de fechahistorica con los eventos que contengan la
+	 * palabra dada
+	 * @param palabra Palabra que contienen los eventos que buscamos
+	 * @return Devuelve una nueva fechahistorica con los eventos seleccionados, siendo una
+	 * fecha vacia de no encontrar ninguna coincidencia
 	 */
-	int buscarEvento(const std::string& _evento) const;
+	fechahistorica fechaClave(const std::string& palabra) const;
 	/**
 	 * @brief Sobrecarga del operador de asignación
 	 * @param fechaH fechahistorica que se asigna

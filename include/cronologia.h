@@ -65,12 +65,6 @@ public:
 	 */
 	unsigned int getNFechas() const {return nFechas;}
 	/**
-	 * @brief Buscador de eventos
-	 * @param evento Evento que se quiere buscar en la cronología
-	 * @return Año en el que se encuentra el evento
-	 */
-	int buscarEvento(const std::string& evento) const;
-	/**
 	 * @brief A partir de una fecha dada devuelve todos sus eventos
 	 * @param anio Año del  que se quiere saber los eventos
 	 * @return La fecha con todos sus eventos. Se devuelve una fecha

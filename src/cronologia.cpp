@@ -63,17 +63,6 @@ cronologia::cronologia(const unsigned int& _nFechas) {
 	reservarMemoria(nFechas);
 }
 
-/*
-int cronologia::buscarEvento(const std::string& evento) const {
-	for (std::size_t i=0;i<nFechas;i++) {
-		for(std::size_t j=0;j<fechas[i].getNumEventos();j++) {
-			if (fechas[i][j]==evento)
-				return fechas[i].getAnio();
-		}
-	}
-}
-*/
-
 fechahistorica cronologia::getEventos(const int& anio) const {
 	fechahistorica aux;
 	for (std::size_t i=0;i<nFechas;i++) {
@@ -137,14 +126,10 @@ cronologia cronologia::subCronologia(const int& anioDesde, const int& anioHasta)
 cronologia cronologia::cronologiaClave(const std::string& clave) const {
 	cronologia subCrono;
 	fechahistorica auxFecha;
-	std::size_t encontrado;
 	for (std::size_t i=0;i<nFechas;i++) {
-		for (std::size_t j=0;j<fechas[i].getNumEventos();j++) {
-			encontrado=fechas[i].getEvento(j).find(clave);
-			if (encontrado!=std::string::npos)
-				auxFecha.asignarEvento(fechas[i].getEvento(j));
-		}
-		subCrono.asignarFecha(auxFecha);
+		auxFecha = fechas[i].fechaClave(clave);
+		if (auxFecha.getAnio()!=-1)
+			subCrono.asignarFecha(auxFecha);
 	}
 	return subCrono;
 }

@@ -11,12 +11,6 @@
 #include <iostream>
 
 int main(int argc, char * argv[]) {
-	//Comprobación inicial
-	if (argc<2) {
-		std::cout<<"Error: Añada al menos un archivo de cronologia\n";
-		return -1;
-	}
-
 	//Calculo de la cronologia total a partir de los parametros de entrada
 	cronologia crono;
 	for(size_t i=1;i<argc;i++) {
