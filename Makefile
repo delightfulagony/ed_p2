@@ -77,9 +77,9 @@ zip: $(PROJECT)
 	rm -rf $(DOC)/html $(DOC)/latex
 	rm -rf *.bgr
 	zip -r $(ZIP)/$(PROJECT).zip *
-	
+
 valgrind: $(PROJECT)
-	valgrind $(VFLAGS) $(BIN)/$(PROJECT) -c $(VTEST) 
+	valgrind $(VFLAGS) $(BIN)/$(PROJECT) $(VTEST)
 
 bigtest:
 	./$(BIN)/$(PROJECT) $(TESTS)
