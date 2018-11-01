@@ -3,3 +3,4 @@ vgcore*
 *.o
 doc/html/
 doc/latex/
+bin/*
