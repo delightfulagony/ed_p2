@@ -156,9 +156,10 @@ std::ostream& operator<<(std::ostream& os, const cronologia& crono) {
 }
 
 std::istream& operator>>(std::istream& is, cronologia& crono) {
-	is >> crono.nFechas;
-	crono.reservarMemoria(crono.nFechas);
-	for (std::size_t i=0;i<crono.nFechas;i++)
-		is >> crono.fechas[i];
+	fechahistorica aux;
+	do {
+		is >> aux;
+		crono.asignarFecha(aux);
+	} while(is);
 	return is;
 }

@@ -41,7 +41,7 @@ TEST3 = $(DATA)/timeline_science.txt
 TEST4 = $(DATA)/timeline_worldhistory.txt
 
 # test de valgrind
-VTEST = $(DATA)/timeline_algorithms.txt
+VTEST = $(DATA)/timeline_worldhistory.txt
 
 # Dependencias
 

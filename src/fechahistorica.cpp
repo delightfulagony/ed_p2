@@ -19,13 +19,17 @@ void fechahistorica::reservarMemoria(const unsigned int& _nEventos) {
 void fechahistorica::copiar(const fechahistorica& copia) {
 	anio = copia.anio;
 	reservarMemoria(copia.nEventos);
-	for (size_t i=0;i<nEventos;i++)
-		eventos[i] = copia.eventos[i];
+	/*
+	for (size_t i=0;i<nEventos;i++) {
+		eventos[i] = copia.eventos[i]; //TODO Esta línea hace acceso ilegal a memoria
+	}
+	*/
 }
 
 void fechahistorica::liberarMemoria() {
-	if (eventos!=NULL)
-		delete[] eventos;
+	if (eventos!=NULL) {
+		delete eventos; //TODO Averiguar por qué `delete[] eventos;` no funciona
+	}
 	anio = 1;
 	nEventos = 0;
 }
@@ -56,7 +60,7 @@ void fechahistorica::asignarEvento(const std::string& nuevo, const int indice) {
 	else {
 		nEventos += 1;
 		redimensionar(nEventos);
-		eventos[nEventos-1] = nuevo;
+		eventos[nEventos-1] = nuevo;	//TODO Asignacion ilegal de memoria
 	}
 }
 
@@ -96,22 +100,21 @@ std::istream& operator>>(std::istream& is,fechahistorica& fechaH) {
 	char aux;
 	is >> _anio >> aux;
 	fechahistorica faux(_anio);
-	
+
 	std::string cadenaEventos;
 	std::getline(is,cadenaEventos);
-	unsigned int ultimaAlmohadilla = 0;
-	unsigned int comienzoEvento = 0;
-	
-	while (ultimaAlmohadilla!=-1) {
-		std::string _evento;
-		ultimaAlmohadilla = cadenaEventos.find('#');
-		if (ultimaAlmohadilla!=-1)
-			_evento = cadenaEventos.substr(comienzoEvento,ultimaAlmohadilla-comienzoEvento);
-		else
-			_evento = cadenaEventos.substr(comienzoEvento,-1);
-		comienzoEvento = ultimaAlmohadilla + 1;
-		faux.asignarEvento(_evento);
+	std::string _evento;
+	for (size_t i=0;i<cadenaEventos.size();i++) {
+		if (i==(cadenaEventos.size()-1)) {
+			_evento+=cadenaEventos[i];
+		} else if (cadenaEventos[i]!='#') {
+			_evento+=cadenaEventos[i];
+		} else if (cadenaEventos[i]=='#') {
+			faux.asignarEvento(_evento);
+			_evento.clear();
+		}
 	}
+
 	fechaH = faux;
 	return is;
 }
