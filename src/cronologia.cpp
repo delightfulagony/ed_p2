@@ -1,4 +1,4 @@
-/**
+/*
  * @file cronologia.h
  * @brief Fichero fuente del TDA cronologia
  * @author Gonzalo Moreno Soto
@@ -12,7 +12,9 @@
 #include <fstream>
 
 void cronologia::reservarMemoria(const unsigned int& _nFechas) {
-	liberarMemoria();
+	//liberarMemoria();
+	delete[] fechas;
+	//nFechas=0;
 	nFechas = _nFechas;
 	fechas = new fechahistorica[_nFechas];
 }
@@ -33,20 +35,16 @@ void cronologia::copiar(const cronologia& copia) {
 void cronologia::resize(const unsigned int& tamanio) {
 	cronologia aux(*this);
 	reservarMemoria(tamanio);
-	std::cout<<aux.nFechas<<std::endl;
 	std::size_t min = (aux.nFechas>tamanio?tamanio:aux.nFechas);
-	std::cout<<min<<std::endl;
-	for (std::size_t i=0;i<min;i++) {
-		std::cout<<"fechasdei: "<<aux.fechas[i]<<std::endl;
+	for (std::size_t i=0;i<min;i++)
 		fechas[i] = aux.fechas[i];
-	}
 	nFechas=tamanio;
 }
 
 void cronologia::ordenaCronologia() {
 	fechahistorica aux;
-	for (std::size_t i=0;i<nFechas;i++) {
-		for (std::size_t j=nFechas-1;j>=0;j--) {
+	for (size_t i=0;i<nFechas-1;i++) {
+		for (size_t j=i+1;j<nFechas;j++) {
 			if (fechas[i].getAnio() > fechas[j].getAnio()) {
 				aux = fechas[i];
 				fechas[i] = fechas[j];
@@ -85,7 +83,6 @@ bool cronologia::estaFecha(const int& anio) const {
 
 void cronologia::asignarFecha(const fechahistorica& fecha) {
 	resize(nFechas+1);
-	std::cout<<"Fecha[0]: "<<fechas[0]<<std::endl;
 	fechas[nFechas-1]=fecha;
 	return;
 }
@@ -102,15 +99,45 @@ bool cronologia::eliminaFecha(const int& anio) {
 	ordenaCronologia();
 	return ans;
 }
-
+/*
 cronologia& cronologia::unionCronologias(const cronologia& sumaCronologia) {
-	for (std::size_t i=0;i<nFechas;i++) {
-		for (std::size_t j=0;j<sumaCronologia.nFechas;j++) {
-			if (fechas[i].getAnio()==sumaCronologia.fechas[j].getAnio()) {
-				fechas[i] += sumaCronologia.fechas[j];
-			} else {
-				asignarFecha(sumaCronologia.fechas[j]);
+	if (nFechas==0) {
+		*this = sumaCronologia;		
+	} else {
+		unsigned int _nFechas = nFechas;
+		bool repetido;
+		for (size_t i=0;i<_nFechas;i++) {
+			for (size_t j=0;j<sumaCronologia.nFechas;j++) {
+				if (fechas[i].getAnio()==sumaCronologia.fechas[j].getAnio()) {
+					fechas[i] += sumaCronologia.fechas[j];
+					std::cout<<fechas[i]<<std::endl;
+				} else {
+					std::cout<<"ASIGNACION\n";
+					asignarFecha(sumaCronologia.fechas[j]);
+				}
 			}
+		}
+		ordenaCronologia();
+	}
+	return *this;
+}
+*/
+cronologia& cronologia::unionCronologias(const cronologia& sumaCronologia) {
+	if (nFechas==0) {
+		*this = sumaCronologia;		
+	} else {
+		unsigned int _nFechas = nFechas;
+		unsigned int indice = -1;
+		for (size_t i=0;i<sumaCronologia.nFechas;i++) {
+			indice = -1;
+			for (size_t j=0;j<_nFechas;j++)
+				if (fechas[j].getAnio()==sumaCronologia.fechas[i].getAnio())
+					indice = j;	
+			
+			if (indice != -1)
+				fechas[indice] += sumaCronologia.fechas[i];
+			else 
+				asignarFecha(sumaCronologia.fechas[i]);
 		}
 	}
 	ordenaCronologia();
@@ -140,14 +167,12 @@ cronologia cronologia::cronologiaClave(const std::string& clave) const {
 
 void cronologia::deArchivo(const char fichero[]) {
 	std::ifstream fin(fichero);
-	if (fin) {
-		std::cout<<std::endl<<fichero<<std::endl;
+	if (fin)
 		fin >> *this;
-		std::cout<<"This: "<<*this<<" end this"<<std::endl;
-	} else
+	 else
 		std::cout<<"Error en la apertura del fichero\n";
 	fin.close();
-	//return;
+	return;
 }
 
 cronologia& cronologia::operator=(const cronologia& crono) {
@@ -156,16 +181,19 @@ cronologia& cronologia::operator=(const cronologia& crono) {
 }
 
 std::ostream& operator<<(std::ostream& os, const cronologia& crono) {
-	for (std::size_t i=0;i<crono.nFechas;i++)
+	for (size_t i=0;i<crono.nFechas;i++)
 		os << crono.fechas[i] << std::endl;
 	return os;
 }
 
 std::istream& operator>>(std::istream& is, cronologia& crono) {
-	fechahistorica aux;
-	do {
-		is >> aux;
-		crono.asignarFecha(aux);
-	} while(is);
+	fechahistorica faux;
+	bool aux = false;
+	while(is) {
+		if (aux==true)
+			crono.asignarFecha(faux);
+		is >> faux;
+		aux = true;
+	}
 	return is;
 }

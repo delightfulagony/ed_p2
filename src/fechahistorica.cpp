@@ -116,11 +116,10 @@ std::istream& operator>>(std::istream& is,fechahistorica& fechaH) {
 	std::getline(is,cadenaEventos);
 	std::string _evento;
 
-	//std::cout<<std::endl<<cadenaEventos<<std::endl;
-
 	for (size_t i=0;i<cadenaEventos.size();i++) {
 		if (i==(cadenaEventos.size()-1)) {
-			_evento+=cadenaEventos[i];
+			if (_evento.size()!=0)
+				faux.asignarEvento(_evento);
 		}
 		else if (cadenaEventos[i]!=aux) {
 			_evento+=cadenaEventos[i];
@@ -131,8 +130,6 @@ std::istream& operator>>(std::istream& is,fechahistorica& fechaH) {
 			_evento.clear();
 		}
 	}
-
-	std::cout<<"\nfaux: "<<faux<<std::endl;
 
 	fechaH = faux;
 	return is;
