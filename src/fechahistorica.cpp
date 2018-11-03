@@ -102,13 +102,17 @@ std::istream& operator>>(std::istream& is,fechahistorica& fechaH) {
 	std::string cadenaEventos;
 	std::getline(is,cadenaEventos);
 	std::string _evento;
+
 	for (size_t i=0;i<cadenaEventos.size();i++) {
 		if (i==(cadenaEventos.size()-1)) {
 			_evento+=cadenaEventos[i];
-		} else if (cadenaEventos[i]!='#') {
+		}
+		else if (cadenaEventos[i]!='#') {
 			_evento+=cadenaEventos[i];
-		} else if (cadenaEventos[i]=='#') {
-			faux.asignarEvento(_evento);
+		}
+		else if (cadenaEventos[i]=='#') {
+			if (_evento.size()!=0)
+				faux.asignarEvento(_evento);
 			_evento.clear();
 		}
 	}
