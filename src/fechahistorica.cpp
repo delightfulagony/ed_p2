@@ -22,9 +22,9 @@ void fechahistorica::copiar(const fechahistorica& copia) {
 		eventos = nullptr;
 	}
 	reservarMemoria(copia.nEventos);
-	for (size_t i=0;i<nEventos;i++)
+	for (int i=0;i<nEventos;i++) {
 		eventos[i] = copia.eventos[i];
-
+	}
 }
 
 void fechahistorica::redimensionar(const unsigned int& t) {
@@ -66,8 +66,9 @@ void fechahistorica::asignarEvento(const std::string& nuevo, const int indice) {
 	if (indice!=-1 && indice<nEventos)
 		eventos[indice] = nuevo;
 	else {
-		nEventos += 1;
-		redimensionar(nEventos);
+		unsigned int ultimo = nEventos;
+		ultimo += 1;
+		redimensionar(ultimo);
 		eventos[nEventos-1] = nuevo;
 	}
 }
