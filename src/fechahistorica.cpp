@@ -17,7 +17,10 @@ void fechahistorica::reservarMemoria(const unsigned int& _nEventos) {
 
 void fechahistorica::copiar(const fechahistorica& copia) {
 	anio = copia.anio;
-	delete[] eventos;
+	if (eventos!=nullptr) {
+		delete[] eventos;
+		eventos = nullptr;
+	}
 	reservarMemoria(copia.nEventos);
 	for (size_t i=0;i<nEventos;i++)
 		eventos[i] = copia.eventos[i];
@@ -27,7 +30,10 @@ void fechahistorica::copiar(const fechahistorica& copia) {
 void fechahistorica::redimensionar(const unsigned int& t) {
 	if (t>0) {
 		fechahistorica aux(*this);
-		delete[] eventos;
+		if (eventos!=nullptr) {
+			delete[] eventos;
+			eventos = nullptr;
+		}
 		reservarMemoria(t);
 		size_t min = (t<aux.getNumEventos())?t:aux.getNumEventos();
 		for (size_t i=0;i<min;i++)
@@ -38,17 +44,21 @@ void fechahistorica::redimensionar(const unsigned int& t) {
 fechahistorica::fechahistorica() {
 	anio = -1;
 	nEventos = 0;
-	eventos = NULL;
+	eventos = nullptr;
 }
 
 fechahistorica::fechahistorica(const int& _anio, const unsigned int& _nEventos) {
 	anio = _anio;
 	if (_nEventos!=0)
 		reservarMemoria(_nEventos);
+	eventos = nullptr;
 }
 
 fechahistorica::~fechahistorica() {
-	delete[] eventos;
+	if (eventos!=nullptr) {
+		delete[] eventos;
+		eventos = nullptr;
+	}	
 	nEventos = 0;
 }
 

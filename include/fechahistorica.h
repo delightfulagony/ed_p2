@@ -32,7 +32,7 @@ private:
 
 	int anio;		  ///< Año del objeto
 	unsigned int nEventos;	  ///< Número de eventos en el año del objeto
-	std::string *eventos;	  ///< Array de eventos
+	std::string *eventos = nullptr;	  ///< Array de eventos
 
 	void reservarMemoria(const unsigned int& _nEventos);	///< Reserva memoria dinámica
 	void copiar(const fechahistorica& copia);		///< Crea una copia del objeto
