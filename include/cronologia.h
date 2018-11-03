@@ -32,7 +32,7 @@ private:
   	 */
   	 
 	unsigned int nFechas;	    ///< Número de fechas en la cronologia
-	fechahistorica *fechas;	    ///< Conjunto de fechas con eventos
+	fechahistorica *fechas=nullptr;	    ///< Conjunto de fechas con eventos
 	
 	void reservarMemoria(const unsigned int& _nFechas);	///< Reserva memoria dinámica
 	void liberarMemoria();					///< Libera memoria dinámica

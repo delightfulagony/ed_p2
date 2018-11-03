@@ -13,12 +13,18 @@
 int main(int argc, char * argv[]) {
 	//Calculo de la cronologia total a partir de los parametros de entrada
 	cronologia crono;
+	
+	std::cout<<std::endl<<"Numero de argumentos: "<<argc<<std::endl;
 
 	for(size_t i=1;i<argc;i++) {
 		cronologia aux;
+		std::cout<<"Incorporando: "<<argv[i]<<std::endl;
 		aux.deArchivo(argv[i]);
-		crono += aux;
+		crono.unionCronologias(aux);
 	}
+
+	std::cout<<"Cronologia: "<<crono<<std::endl;
+	std::cout<<"Numero de fechas: "<<crono.getNFechas()<<std::endl;
 
 	//Rutina habitual del programa
 	char opt = 'q';

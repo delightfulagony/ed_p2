@@ -18,9 +18,8 @@ void cronologia::reservarMemoria(const unsigned int& _nFechas) {
 }
 
 void cronologia::liberarMemoria() {
-	if (fechas==nullptr)
-		return;
-	delete[] fechas;
+	if (fechas!=nullptr)
+		delete[] fechas;
 	nFechas = 0;
 }
 
@@ -34,9 +33,13 @@ void cronologia::copiar(const cronologia& copia) {
 void cronologia::resize(const unsigned int& tamanio) {
 	cronologia aux(*this);
 	reservarMemoria(tamanio);
-	std::size_t min = (aux.getNFechas()?tamanio:aux.getNFechas());
-	for (std::size_t i=0;i<min;i++)
-		fechas[i] = aux.getEventos(i);
+	std::cout<<aux.nFechas<<std::endl;
+	std::size_t min = (aux.nFechas>tamanio?tamanio:aux.nFechas);
+	std::cout<<min<<std::endl;
+	for (std::size_t i=0;i<min;i++) {
+		std::cout<<"fechasdei: "<<aux.fechas[i]<<std::endl;
+		fechas[i] = aux.fechas[i];
+	}
 	nFechas=tamanio;
 }
 
@@ -82,6 +85,7 @@ bool cronologia::estaFecha(const int& anio) const {
 
 void cronologia::asignarFecha(const fechahistorica& fecha) {
 	resize(nFechas+1);
+	std::cout<<"Fecha[0]: "<<fechas[0]<<std::endl;
 	fechas[nFechas-1]=fecha;
 	return;
 }
@@ -136,12 +140,14 @@ cronologia cronologia::cronologiaClave(const std::string& clave) const {
 
 void cronologia::deArchivo(const char fichero[]) {
 	std::ifstream fin(fichero);
-	if (fin)
+	if (fin) {
+		std::cout<<std::endl<<fichero<<std::endl;
 		fin >> *this;
-	else
+		std::cout<<"This: "<<*this<<" end this"<<std::endl;
+	} else
 		std::cout<<"Error en la apertura del fichero\n";
 	fin.close();
-	return;
+	//return;
 }
 
 cronologia& cronologia::operator=(const cronologia& crono) {

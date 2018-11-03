@@ -81,19 +81,19 @@ zip: $(PROJECT)
 valgrind: $(PROJECT)
 	valgrind $(VFLAGS) $(BIN)/$(PROJECT) $(VTEST)
 
-bigtest:
+bigtest: $(PROJECT)
 	./$(BIN)/$(PROJECT) $(TESTS)
 
-test1:
+test1: $(PROJECT)
 	./$(BIN)/$(PROJECT) $(TEST1)
 
-test2:
+test2: $(PROJECT)
 	./$(BIN)/$(PROJECT) $(TEST2)
 	
-test3:
+test3: $(PROJECT)
 	./$(BIN)/$(PROJECT) $(TEST3)
 	
-test4:
+test4: $(PROJECT)
 	./$(BIN)/$(PROJECT) $(TEST4)
 
 help:
