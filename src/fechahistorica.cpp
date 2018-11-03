@@ -11,41 +11,34 @@
 #include <string>
 
 void fechahistorica::reservarMemoria(const unsigned int& _nEventos) {
-	liberarMemoria();
 	nEventos = _nEventos;
 	eventos = new std::string[nEventos];
 }
 
 void fechahistorica::copiar(const fechahistorica& copia) {
 	anio = copia.anio;
+	delete[] eventos;
 	reservarMemoria(copia.nEventos);
-	/*
-	for (size_t i=0;i<nEventos;i++) {
-		eventos[i] = copia.eventos[i]; //TODO Esta línea hace acceso ilegal a memoria
-	}
-	*/
-}
+	for (size_t i=0;i<nEventos;i++)
+		eventos[i] = copia.eventos[i];
 
-void fechahistorica::liberarMemoria() {
-	if (eventos!=NULL) {
-		delete eventos; //TODO Averiguar por qué `delete[] eventos;` no funciona
-	}
-	anio = 1;
-	nEventos = 0;
 }
 
 void fechahistorica::redimensionar(const unsigned int& t) {
-	fechahistorica aux(*this);
-	liberarMemoria();
-	reservarMemoria(t);
-	size_t min = (t<aux.getNumEventos())?t:aux.getNumEventos();
-	for (size_t i=0;i<min;i++)
-		eventos[i] = aux.eventos[i];
+	if (t>0) {
+		fechahistorica aux(*this);
+		delete[] eventos;
+		reservarMemoria(t);
+		size_t min = (t<aux.getNumEventos())?t:aux.getNumEventos();
+		for (size_t i=0;i<min;i++)
+			eventos[i] = aux.eventos[i];
+	}
 }
 
 fechahistorica::fechahistorica() {
 	anio = -1;
 	nEventos = 0;
+	eventos = NULL;
 }
 
 fechahistorica::fechahistorica(const int& _anio, const unsigned int& _nEventos) {
@@ -54,13 +47,18 @@ fechahistorica::fechahistorica(const int& _anio, const unsigned int& _nEventos) 
 		reservarMemoria(_nEventos);
 }
 
+fechahistorica::~fechahistorica() {
+	delete[] eventos;
+	nEventos = 0;
+}
+
 void fechahistorica::asignarEvento(const std::string& nuevo, const int indice) {
 	if (indice!=-1 && indice<nEventos)
 		eventos[indice] = nuevo;
 	else {
 		nEventos += 1;
 		redimensionar(nEventos);
-		eventos[nEventos-1] = nuevo;	//TODO Asignacion ilegal de memoria
+		eventos[nEventos-1] = nuevo;
 	}
 }
 

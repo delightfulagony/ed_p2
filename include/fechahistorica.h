@@ -35,7 +35,6 @@ private:
 	std::string *eventos;	  ///< Array de eventos
 
 	void reservarMemoria(const unsigned int& _nEventos);	///< Reserva memoria dinámica
-	void liberarMemoria(); 					///< Libera memoria dinámica
 	void copiar(const fechahistorica& copia);		///< Crea una copia del objeto
 	void redimensionar(const unsigned int& t);		///< Redimensiona el array de eventos
 public:
@@ -57,7 +56,7 @@ public:
 	/**
 	 * @brief Destructor de la clase fechahistorica
 	 */
-	~fechahistorica() {liberarMemoria();}	
+	~fechahistorica();	
 	/**
 	 * @brief Observador del parámetro anio
 	 * @return Devuelve el año 
