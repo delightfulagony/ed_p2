@@ -18,7 +18,7 @@ void cronologia::reservarMemoria(const unsigned int& _nFechas) {
 }
 
 void cronologia::liberarMemoria() {
-	if (fechas==NULL)
+	if (fechas==nullptr)
 		return;
 	delete[] fechas;
 	nFechas = 0;
@@ -55,7 +55,7 @@ void cronologia::ordenaCronologia() {
 
 cronologia::cronologia() {
 	nFechas = 0;
-	fechas = NULL;
+	fechas = nullptr;
 }
 
 cronologia::cronologia(const unsigned int& _nFechas) {
