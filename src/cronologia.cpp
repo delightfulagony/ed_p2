@@ -12,17 +12,9 @@
 #include <fstream>
 
 void cronologia::reservarMemoria(const unsigned int& _nFechas) {
-	//liberarMemoria();
 	delete[] fechas;
-	//nFechas=0;
 	nFechas = _nFechas;
 	fechas = new fechahistorica[_nFechas];
-}
-
-void cronologia::liberarMemoria() {
-	if (fechas!=nullptr)
-		delete[] fechas;
-	nFechas = 0;
 }
 
 void cronologia::copiar(const cronologia& copia) {
@@ -99,29 +91,7 @@ bool cronologia::eliminaFecha(const int& anio) {
 	ordenaCronologia();
 	return ans;
 }
-/*
-cronologia& cronologia::unionCronologias(const cronologia& sumaCronologia) {
-	if (nFechas==0) {
-		*this = sumaCronologia;		
-	} else {
-		unsigned int _nFechas = nFechas;
-		bool repetido;
-		for (size_t i=0;i<_nFechas;i++) {
-			for (size_t j=0;j<sumaCronologia.nFechas;j++) {
-				if (fechas[i].getAnio()==sumaCronologia.fechas[j].getAnio()) {
-					fechas[i] += sumaCronologia.fechas[j];
-					std::cout<<fechas[i]<<std::endl;
-				} else {
-					std::cout<<"ASIGNACION\n";
-					asignarFecha(sumaCronologia.fechas[j]);
-				}
-			}
-		}
-		ordenaCronologia();
-	}
-	return *this;
-}
-*/
+
 cronologia& cronologia::unionCronologias(const cronologia& sumaCronologia) {
 	if (nFechas==0) {
 		*this = sumaCronologia;		

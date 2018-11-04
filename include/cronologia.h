@@ -35,7 +35,6 @@ private:
 	fechahistorica *fechas=nullptr;	    ///< Conjunto de fechas con eventos
 	
 	void reservarMemoria(const unsigned int& _nFechas);	///< Reserva memoria dinámica
-	void liberarMemoria();					///< Libera memoria dinámica
 	void copiar(const cronologia& copia);			///< Crea una copia del objeto
 	void ordenaCronologia();				///< Ordena las fechas del objeto en orden cronológico
 	void resize(const unsigned int& tamanio);		///< Altera el tamaño del objeto
