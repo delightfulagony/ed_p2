@@ -15,9 +15,9 @@ char menu() {
 	char aux = 'q';
 	std::cout<<"Menu del programa:\n";
 	std::cout<<"	s	Salva la cronologia en el archivo seleccionado\n";
-	std::cout<<"	a	Muestra todos los eventos acaecidos en el anio seleccionado\n";
 	std::cout<<"	m	Muestra toda la cronologia en pantalla\n";
 	std::cout<<"	u	Aniade la cronologia de un fichero\n";
+	std::cout<<"	a	Crea una subcronologia con el anio seleccionado\n";
 	std::cout<<"	p	Crea una subcronologia en el periodo de los anios dados\n";
 	std::cout<<"	c	Crea una subcronologia a partir de una palabra clave\n";
 	std::cout<<"	e	Elimina un año de la cronologia\n";

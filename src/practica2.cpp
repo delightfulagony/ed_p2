@@ -23,7 +23,7 @@ int main(int argc, char * argv[]) {
 		crono.unionCronologias(aux);
 	}
 
-	std::cout<<"Cronologia: "<<crono<<std::endl;
+	//std::cout<<"Cronologia: "<<crono<<std::endl;
 	std::cout<<"Numero de fechas: "<<crono.getNFechas()<<std::endl;
 
 	//Rutina habitual del programa
