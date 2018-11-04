@@ -57,7 +57,7 @@ public:
 	/**
 	 * @brief Destructor de la clase
 	 */
-	~cronologia() {liberarMemoria();}
+	~cronologia();
 	/**
 	 * @brief Observador del número de fechas
 	 * @return El número de fechas en la cronología
