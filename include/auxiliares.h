@@ -83,8 +83,7 @@ bool quit(cronologia& crono,bool& guardado);
 
 /**
  * @brief Ayuda al usuario en caso de error en el menu
- * @param opt Opcion a elegir del menu
  */
-void defaultCrono(char& opt);
+void defaultCrono();
 
 #endif
