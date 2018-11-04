@@ -28,7 +28,7 @@ int main(int argc, char * argv[]) {
 
 	//Rutina habitual del programa
 	char opt = 'q';
-	bool guardado = true;
+	bool guardado = false;
 	bool exit = false;
 	do {
 		opt = menu();
