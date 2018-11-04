@@ -67,7 +67,7 @@ refresh:
 
 doxy:
 	rm -rf $(DOC)/html $(DOC)/latex
-	doxygen $(DOC)/$(PROJECT).doxy
+	doxygen $(DOC)/cronologia.doxy
 	firefox $(DOC)/html/index.html
 
 zip: $(PROJECT)
