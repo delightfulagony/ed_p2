@@ -51,6 +51,11 @@ cronologia::cronologia() {
 	fechas = nullptr;
 }
 
+cronologia::~cronologia() {
+	delete[] fechas;
+	fechas = nullptr;
+}
+
 cronologia::cronologia(const unsigned int& _nFechas) {
 	nFechas = _nFechas;
 	reservarMemoria(nFechas);
