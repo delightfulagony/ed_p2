@@ -4,3 +4,5 @@ vgcore*
 doc/html/
 doc/latex/
 bin/*
+*.crono
+zip/*
